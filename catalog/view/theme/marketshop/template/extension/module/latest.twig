@@ -1,0 +1,89 @@
+{% if module['position'] == 'content_top' or module['position'] == 'content_bottom' %}
+<h3>{{ heading_title }}</h3>
+<div class="owl-carousel latest_carousel">
+ {% for product in products %}
+    <div class="product-thumb clearfix">
+      <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+      <div class="caption">
+        <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+        <!--<p>{{ product.description }}</p>-->
+        {% if product.price %}
+        <p class="price">
+          {% if not product.special %}
+          {{ product.price }}
+          {% else %}
+          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+          {% if marketshop_percentage_discount_badge == 1 %}<span class="saving">-{{ product.saving }}%</span>{% endif %}
+          {% endif %}
+          {% if product.tax %}
+          <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+          {% endif %}
+        </p>
+        {% endif %}
+        {% if product.rating %}
+        <div class="rating">
+          {% for i in 1..5 %}
+          {% if product.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div class="button-group">
+        <button class="btn-primary" type="button" onclick="cart.add('{{ product.product_id }}');"><span>{{ button_cart }}</span></button>
+        <div class="add-to-links">
+        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#content .owl-carousel.latest_carousel").owlCarousel({
+		itemsCustom : [[320, 2],[600, 3],[768, 3],[992, {{ marketshop_latest_slider_product_per_row }}],[1199, {{ marketshop_latest_slider_product_per_row }}]],											   
+		lazyLoad : true,
+		navigation : true,
+		navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+		scrollPerPage : true
+    }); 
+		});
+</script>
+{% else %}
+<h3>{{ heading_title }}</h3>
+<div class="owl-carousel latest_carousel">
+ {% for product in products %}
+<div class="product-thumb clearfix">
+      <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+      <div class="caption">
+        <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+        {% if product.price %}
+        <p class="price">
+          {% if not product.special %}
+          {{ product.price }}
+          {% else %}
+          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+          {% if marketshop_percentage_discount_badge == 1 %}<span class="saving">-{{ product.saving }}%</span>{% endif %}
+          {% endif %}
+        </p>
+        {% endif %}
+        {% if product.rating %}
+        <div class="rating">
+          {% for i in 1..5 %}
+          {% if product.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}

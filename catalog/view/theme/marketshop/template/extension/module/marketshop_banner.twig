@@ -1,0 +1,11 @@
+<div id="marketshop-banner{{ module }}" class="marketshop-banner">
+<div class="row">
+  {% for banner in banners %}
+  {% if banner.link %}
+  <div class="{{ perrow_id }}>"><a href="{{ banner.link }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" title="{{ banner.title }}" /></a></div>
+  {% else %}
+  <div class="{{ perrow_id }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" title="{{ banner.title }}" /></div>
+  {% endif %}
+  {% endfor %}
+</div>
+</div>

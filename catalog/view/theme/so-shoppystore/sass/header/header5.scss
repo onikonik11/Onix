@@ -1,0 +1,207 @@
+/*============HEADER V1 ==================*/
+
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';  
+@import 'utilities/utilities';
+
+/*===============================================
+    [SASS DIRECTORY ]
+    
+    [1] BLOCK HEADER
+    [2] BLOCK FOOTER
+    
+==============================================*/
+
+/*============HEADER V5 ==================*/
+header.typeheader-5{
+    .header-top{
+        background: darken($background_header5,5%); color: $base-border-color;line-height: 40px;
+        @include rem(font-size, 12px);
+        .btn-link{ padding: 10px 15px; line-height: 25px; @include rem(font-size, 12px); @include linkGrayLight(); background: transparent !important;}
+        button{padding: 3px 10px;}
+    }
+    .header-top-left{padding: 3px 15px;
+        .fa {margin-#{$right}: 5px; color: $background;}
+    }
+    .header-top-right{
+        .top-link > li{padding: 0;vertical-align: middle;
+            &:last-child:after{display: none;}
+            &:after{
+                content: "";
+                height: 20px; display: inline-block;vertical-align: middle;
+                border-left: 1px solid rgba(255, 255, 255, 0.2);
+            }
+           > a{
+                color: #ddd;
+                &:hover{
+                    color: $linkColor;
+                }
+            }
+            &.wishlist{
+                .pull-left{
+                    padding: 0 15px;
+                }
+                a{
+                    color: #ddd;
+                    &:hover{
+                        color: $linkColor;
+                    }
+                }
+            }
+          
+        }
+    }
+    .header-center{padding: 30px 0 ; background: $background_header5;}
+    .header-bottom {background: $background_header5;margin-bottom: 30px;}
+    
+    //------ BLOCK SEARCH ------ 
+    #search  { visibility: hidden;
+        .btn-default { margin: 0;background-color: #e7e7e7;}
+    }
+    
+     #sosearchpro{    width: 515px;display: inline-block;padding: 0;
+        .select_category {
+            border: none;width:25%;
+            border-#{$right}: 1px solid $table-border-color ;
+            border-radius: side-values(2px 0 0 2px  );
+        }
+        .icon-select:after {
+            content: "\f0d7";
+            height: 13px;
+            width: 13px;
+            top: 50%;
+            margin-top: -7px;
+            border: 1px solid #ddd;
+            border-radius: 13px;
+            font-size: 12px;
+            color: #999;
+            z-index: 3;
+            line-height: 12px;
+            #{$right}: -7px;
+            #{$left}: auto;
+        }
+        .form-control{
+            height: 42px;
+            background: white;
+            padding: 9px 20px;
+            @include rem(font-size, 12px);
+        }
+        .button-search{padding: 9px 10px;border-radius: corner-values(0 2px 2px 0);}
+        .so-keyword{font-size: 12px;color: $base-border-color;
+            a{@include linkGrayLight();}
+        }
+    }
+    
+   // 2. LANGUAGE BLOCK -------------------------
+    .curenty-laguage{
+        position: relative;
+        display: inline-block;
+        min-width: 136px;
+        vertical-align: top;
+        margin-#{$left}: 13px;
+    }
+    
+    .languages-block,
+    .currencies-block{position:relative;vertical-align:top; margin:0;display: inline-block;margin-#{$right}: 2px;
+        .btn-group >  button{
+            background: #313c62;
+            color: #ddd ;
+            padding: 5px 9px ;
+            line-height: 30px;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            border-radius: 2px!important;
+               
+        }   
+    }
+    
+    
+   // 4. BLOCK CART -------------------------
+    .shopping_cart{   min-width: 170px; position: relative;z-index: 2;
+        .btn-group{display: block;}
+        #cart .dropdown-menu{margin-#{$right}: 0;}
+        a.btn-group{
+            display: block; 
+            position: relative; 
+            box-shadow: none ; 
+            text-decoration: none ;
+            border-radius: 2px;
+            
+           .shopcart{
+                 @include buttonColor(); border: none; padding: side-values(8px 0 8px 42px);
+                .title{color: #fff;font-weight: bold;text-transform: uppercase;}
+                .text-shopping-cart{    
+                    color: #fff;
+                    font-weight: bold;
+                    font-size: 14px;
+                   
+                }
+           }
+           .handle{
+                background: url("#{$imgPath}/icon-cart.png") no-repeat  center;
+                width: 46px;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                #{$left}: 0;
+            }
+        }
+        
+    }
+    
+    //CUSTOM PHONE
+    .custom-phone{
+        padding: 0;
+        vertical-align: middle;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #fff;
+        padding-top: 12px;
+       
+        .fa{color: $background;padding-#{$right}: 5px;}
+       
+    }
+     // Megamenu Horizontal ------
+    .container-megamenu.vertical .vertical-wrapper{width:100%;}
+    .container-megamenu.vertical:hover .vertical-wrapper{display: block;background: $white;}
+    .content_menu{ padding: 0;
+        .navbar-default{background: transparent;}
+        
+    }
+    .vertical { position: relative;
+        .megamenuToogle-wrapper{background: $background !important; border-radius: corner-values(3px 3px 0 0);
+            .container{font-size: 14px;font-weight: bold;text-transform: uppercase;padding: 12px 20px !important;}
+        }
+    }
+    .horizontal{
+        ul.megamenu > li > a{
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: none;
+            padding: 0 10px 0;
+            height: auto;
+            line-height: 48px;
+            strong { font-weight: 500;}
+        }
+    }
+}

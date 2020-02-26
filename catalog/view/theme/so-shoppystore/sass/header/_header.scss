@@ -1,0 +1,88 @@
+
+header{
+
+    /*============ HEADER  ==================*/
+        
+    //------ Megamenu Horizontal --------
+    .horizontal{
+        .megamenu-wrapper{
+            background: transparent;
+        }
+        ul.megamenu > li > .sub-menu{border-top: 2px solid $background;}
+        ul.megamenu > li > a{padding: 10px 15px; text-transform: uppercase;font-size: 14px;text-shadow:none;
+            .fa{padding-#{$right}: 10px;}
+            
+        }
+        ul.megamenu > li{margin-#{$right}: 1px;float: $left;}
+        ul.megamenu li .sub-menu .content .fa{margin: 0 10px;
+            @include if-rtl {
+                &.fa-angle-right:before{content: "\f104";}
+            }
+        }
+        ul.megamenu > li.home > a{ background: transparent;}
+        ul.megamenu > li.active > a, ul.megamenu > li:hover > a{
+            background: transparent;
+            color: $linkColor;
+        }
+        
+        .subcategory li a{@include linkGray();}
+    }
+
+    .mega-horizontal .navbar-default{border: none;background: transparent;}
+    @media (max-width: 991px){
+        .responsive ul.megamenu > li.click:before,
+        .responsive ul.megamenu > li.hover:before {
+            #{$right}: 0;
+            #{$left}: auto;
+        }
+        .responsive ul.megamenu > li.active .close-menu{
+            #{$right}: 0;
+            #{$left}: auto;
+        }
+    }
+
+    //------  Megamenu Vertical ------ 
+    .header-bottom .content_menu .container{overflow: visible;}
+
+
+    //------ Shoppinh Cart  ------ 
+    .btn-shopping-cart {
+        .dropdown-menu{
+           &:after{border-color: transparent transparent $background transparent; border-width: 10px;top:-21px;}
+            min-width: 400px;
+            border-top:3px solid $background;
+            .cart_product_name{@include linkGray();}
+            .empty{padding: 30px 30px;}
+        }
+        .table>tbody>tr>td{border: none;border-bottom: 1px solid $gray-lighter;vertical-align: middle;}
+        .checkout{padding: 0 20px 10px;}
+        .added_items{padding: 10px;}
+    } 
+    .style-page{
+        position: relative;
+        .sub-menu{
+            min-width: 350px;
+        }
+    }  
+    #sosearchpro .select_category select{
+        padding: 0 10px !important;
+    }
+}
+
+.megamenu-style-dev  li .sub-menu .content .static-menu{
+    a.main-menu{
+        display: block;
+        font-weight: 700 !important;
+        font-size: 14px;
+        text-transform: uppercase;
+        border-bottom: 1px solid #e6e6e6;
+        padding-bottom: 5px;
+        color: #555 !important;
+    }
+     .menu ul ul{
+        padding: 5px 0 !important;
+         li:before{
+            display: none;
+        }
+    }
+}

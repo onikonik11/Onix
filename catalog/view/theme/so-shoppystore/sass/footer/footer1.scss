@@ -1,0 +1,78 @@
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';
+@import 'utilities/utilities';
+
+/************************************************************************************************
+  FOOTER DEFFAULT
+*************************************************************************************************/
+/*============FOOTER 1 ==================*/
+footer.typefooter-1{
+  
+  &.footer-container{background: $gray-lighter;}
+ 	.so-custom-default.newsletter{
+		background: transparent !important;
+		padding: 0;
+ 	}
+  .footer-midde-block1{
+	background: $table-border-color;
+	border: 1px solid $input-border;
+	padding: 30px  0;
+  }
+  
+  .footer-midde-block2 .style-dev-so-tags{ padding: 20px 0 10px; border-bottom: 1px solid $table-border-color;}
+  .footer-bottom {padding: 20px 0;}
+  .footer-newsletter{
+	  background:url('#{$imgPath}footer/newsletter-bg.jpg') no-repeat;
+	  background-size: cover;
+   }
+  .footer-center{
+	  ul.menu li{
+		  a{
+		  padding-#{$left}: 15px;
+		  float: $left;
+		  width: 100%;
+		  margin: 3px 0;
+		  position: relative;
+		  color: #6d6d6d;
+		  &:before{
+			position: absolute;
+			content: "";
+			top:10px;
+			#{$left}: 0;
+			width: 3px;
+			height: 3px;
+			border-radius: 50%;
+			background: #6d6d6d;
+		  }
+		  &:hover{
+			color: $background1;
+		  }
+		}
+		&:hover{
+		  color: $background1;
+		  a{
+			&:before{
+			  background: $background1;
+			}
+		  } 
+		}
+	  } 
+  }
+}

@@ -1,0 +1,12 @@
+@include breakpoint(lg){
+	.container{width:1200px;overflow: visible;}
+	
+	/*============HOME DEFAULT ==================*/
+	.layout-1.common-home .vertical .vertical-wrapper {
+		display: block !important;
+	}
+       
+	.layout-1.common-home{
+		.so-listing-tabs .ltabs-wrap .ltabs-items-container{width:940px;}
+	}
+}

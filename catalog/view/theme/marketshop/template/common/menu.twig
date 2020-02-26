@@ -1,0 +1,299 @@
+{% if marketshop_main_menu_style == 2 %}
+  <div class="container">
+    {% endif %}
+    {% set lang = config_language_id %}
+    <nav id="menu" class="navbar">
+      <div class="navbar-header"> <span class="visible-xs visible-sm">
+        {{ marketshop_mobile_menu_title[lang] }} <b></b></span>
+      </div>
+      {% if marketshop_main_menu_style == 1 %}
+      <div class="container">
+        {% endif %}
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            {% if marketshop_home_page_link == 1 %}
+            <li><a class="home_link" title="{{ text_home }}" href="{{ home }}">
+              {% if marketshop_home_page_link_icon == 1 %}
+              {{ text_home }}
+              {% else %}
+              <i class="fa fa-home"></i>
+              {% endif %}
+              </a></li>
+            {% endif %}
+            {% if categories %}
+            {% if marketshop_top_menu == 1 %}
+            {% for category in categories %}
+            <li class="categories_defu dropdown"><a class="dropdown-toggle" href="{{ category.href }}">{{ category.name }}</a>
+              {% if category.children %}
+              <div class="dropdown-menu">
+              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                  <ul>
+                    {% for child in children %}
+                    <li>
+                    {% if child.children|length > 0 %}
+                        <a href="{{ child.href }}">{{ child.name }}
+                        {% if direction == 'ltr' %}
+                    <span>&rsaquo;</span>
+                    {% else %}
+                    <span>&lsaquo;</span>
+                    {% endif %}
+                        </a>
+                        {% else %}
+                        <a href="{{ child.href }}">{{ child.name }}</a>
+                        {% endif %}
+                        {% if child.children %}
+                        <div class="submenu">
+                            <ul>
+                            	{% for child in child.children %}
+                                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% endfor %}
+              </div>
+              {% endif %}
+            </li>
+            {% endfor %}
+            {% elseif marketshop_top_menu == 2 %}
+            <li class="categories dropdown">
+            <a>{{ marketshop_menu_categories_title[lang] }}</a>
+            <div class="dropdown-menu">
+            {% for category in categories %}
+            <div class="column">
+            {% if category.children|length > 0 %}
+            <a href="{{ category.href }}">{{ category.name }}
+            {% if direction == 'ltr' %}
+             <span>&rsaquo;</span>
+              {% else %}
+             <span>&lsaquo;</span>
+            {% endif %}
+            </a>
+            {% else %}
+            <a href="{{ category.href }}">{{ category.name }}</a>
+            {% endif %}
+            {% if category.children %}
+              <div class="dropdown-menu">
+              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                  <ul>
+                    {% for child in children %}
+                    <li>
+                    {% if child.children|length > 0 %}
+                        <a href="{{ child.href }}">{{ child.name }}
+                        {% if direction == 'ltr' %}
+                        <span>&rsaquo;</span>
+                        {% else %}
+                        <span>&lsaquo;</span>
+                        {% endif %}
+                        </a>
+                        {% else %}
+                        <a href="{{ child.href }}">{{ child.name }}</a>
+                        {% endif %}
+                        {% if child.children %}
+                        <div class="submenu">
+                            <ul>
+                            	{% for child in child.children %}
+                                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% endfor %}
+              </div>
+              {% endif %}
+            
+            </div>
+            {% endfor %}
+            </div>
+            </li>
+            {% elseif marketshop_top_menu == 3 %}
+            <li class="categories_hor dropdown">
+            <a>{{ marketshop_menu_categories_title[lang] }}</a>
+            <div class="dropdown-menu">
+            {% for category in categories %}
+            <div class="column col-lg-2 col-md-3">
+            <a href="{{ category.href }}">{{ category.name }}</a>
+            {% if category.children %}
+              <div>
+              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                  <ul>
+                    {% for child in children %}
+                    <li>
+                    {% if child.children|length > 0 %}
+                        <a href="{{ child.href }}">{{ child.name }}
+                        {% if direction == 'ltr' %}
+                        <span>&rsaquo;</span>
+                        {% else %}
+                        <span>&lsaquo;</span>
+                        {% endif %}
+                        </a>
+                        {% else %}
+                        <a href="{{ child.href }}">{{ child.name }}</a>
+                        {% endif %}
+                        {% if child.children %}
+                        <div class="submenu">
+                            <ul>
+                            	{% for child in child.children %}
+                                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% endfor %}
+              </div>
+              {% endif %}
+            
+            </div>
+            {% endfor %}
+            </div>
+            </li>
+            {% elseif marketshop_top_menu == 4 %}
+            {% for category in categories %}
+            <li class="categories_hor dropdown">
+            <a href="{{ category.href }}">{{ category.name }}</a>
+            {% if category.children %}
+              <div class="dropdown-menu">
+              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+              {% for child in children %}
+              <div class="column col-lg-2 col-md-3">
+              <a href="{{ child.href }}">{{ child.name }}</a>
+              {% if child.children %}
+              <div>
+                  <ul>
+                            	{% for child in child.children %}
+                                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+                                {% endfor %}
+                  </ul>
+                  </div>{% endif %}
+               </div>                  
+               {% endfor %}
+               {% endfor %}
+              </div>
+              {% endif %}
+            </li>
+            {% endfor %}
+            {% endif %}
+            {% endif %}
+            {% if marketshop_menu_brands == 1 %}
+            <li class="menu_brands {% if marketshop_brands_display_style == 1 %}name{% endif %} dropdown">
+              <a href="{{ manufacturer }}">{{ marketshop_menu_brands_title[lang] }}</a>
+              {% if marketshop_brands_display_style == 1 %}
+              <div class="dropdown-menu">
+                {% if manufacturers %}
+                <ul>
+                  {% for manufacturer in manufacturers %}
+                  <li><a href="{{ manufacturer.href }}">{{ manufacturer.name }}</a></li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              {% endif %}
+              {% if marketshop_brands_display_style == 2 %}
+              <div class="dropdown-menu">
+                {% if manufacturers %}
+                {% for manufacturer in manufacturers %}
+                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"> <a href="{{ manufacturer.href }}"><img src="{{ manufacturer.image }}" title="{{ manufacturer.name }}" alt="{{ manufacturer.name }}" /></a> </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+              {% endif %}
+              {% if marketshop_brands_display_style == 3 %}
+              <div class="dropdown-menu">
+                {% if manufacturers %}
+                {% for manufacturer in manufacturers %}
+                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"> <a href="{{ manufacturer.href }}"><img src="{{ manufacturer.image }}" title="{{ manufacturer.name }}" alt="{{ manufacturer.name }}" /></a> <a href="{{ manufacturer.href }}">{{ manufacturer.name }}</a></div>
+                {% endfor %}
+                {% endif %}
+              </div>
+              {% endif %}
+            </li>
+            {% endif %}
+            {% if marketshop_custom_link1 == 1 and marketshop_custom_link1_title[lang] != '' %}
+            <li class="custom-link"><a href="{{ marketshop_custom_link1_url }}" target="{{ marketshop_target_link1 }}"> {{ marketshop_custom_link1_title[lang] }}</a> </li>
+            {% endif %}
+            
+            {% if marketshop_custom_link2 == 1 and marketshop_custom_link2_title[lang] != '' %}
+            <li class="custom-link"><a href="{{ marketshop_custom_link2_url }}" target="{{ marketshop_target_link2 }}"> {{ marketshop_custom_link2_title[lang] }}</a> </li>
+            {% endif %}
+            
+            {% if marketshop_custom_link3 == 1 and marketshop_custom_link3_title[lang] != '' %}
+            <li class="custom-link"><a href="{{ marketshop_custom_link3_url }}" target="{{ marketshop_target_link3 }}"> {{ marketshop_custom_link3_title[lang] }}</a> </li>
+            {% endif %}
+            
+            {% if marketshop_custom_link4 == 1 and marketshop_custom_link4_title[lang] != '' %}
+            <li class="custom-link"><a href="{{ marketshop_custom_link4_url }}" target="{{ marketshop_target_link4 }}"> {{ marketshop_custom_link4_title[lang] }}</a> </li>
+            {% endif %}
+            
+            {% if marketshop_custom_link5 == 1 and marketshop_custom_link5_title[lang] != '' %}
+            <li class="custom-link"><a href="{{ marketshop_custom_link5_url }}" target="{{ marketshop_target_link5 }}"> {{ marketshop_custom_link5_title[lang] }}</a> </li>
+            {% endif %}
+            {% if marketshop_custom_block_status == 1 and marketshop_custom_block_title[lang] != '' %}
+             <li class="dropdown wrap_custom_block hidden-sm hidden-xs"><a>{{ marketshop_custom_block_title[lang] }}</a>
+              <div class="dropdown-menu custom_block">
+                <ul>
+                {% if marketshop_custom_block_content %}
+                  <li>{{ marketshop_custom_block_content }}</li>
+                {% endif %}
+                </ul>
+              </div>
+            </li>
+            {% endif %}
+            {% if marketshop_custom_block2_status == 1 and marketshop_custom_block2_title[lang] != '' %}
+             <li class="dropdown wrap_custom_block hidden-sm hidden-xs"><a>{{ marketshop_custom_block2_title[lang] }}</a>
+              <div class="dropdown-menu custom_block">
+                <ul>
+                {% if marketshop_custom_block2_content %}
+                  <li>{{ marketshop_custom_block2_content }}</li>
+                {% endif %}
+                </ul>
+              </div>
+            </li>
+            {% endif %}
+            {% if marketshop_custom_block3_status == 1 and marketshop_custom_block3_title[lang] != '' %}
+             <li class="dropdown wrap_custom_block hidden-sm hidden-xs"><a>{{ marketshop_custom_block3_title[lang] }}</a>
+              <div class="dropdown-menu custom_block">
+                <ul>
+                {% if marketshop_custom_block3_content %}
+                  <li>{{ marketshop_custom_block3_content }}</li>
+                {% endif %}
+                </ul>
+              </div>
+            </li>
+            {% endif %}
+            {% if marketshop_information_page == 1 %}
+            {% if informations %}
+            <li class="dropdown information-link"><a>{{ text_information }}</a>
+              <div class="dropdown-menu">
+                <ul>
+                  {% for information in informations %}
+                  <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+            {% endif %}
+            {% endif %}            
+            {% if marketshop_contact_us == 1 %}
+            <li class="contact-link"><a href="{{ contact }}">{{ text_contact }}</a></li>
+            {% endif %}
+            {% if marketshop_custom_link_right == 1 and marketshop_custom_link_right_title[lang] %}
+            <li class="custom-link-right"><a href="{{ marketshop_custom_link_right_url }}" target="{{ marketshop_custom_link_right_target }}"> {{ marketshop_custom_link_right_title[lang] }}</a> </li>
+            {% endif %}
+          </ul>
+        </div>
+        {% if marketshop_main_menu_style == 0 %}
+      </div>
+      {% endif %}
+    </nav>
+    {% if marketshop_main_menu_style == 2 %}
+  </div>
+{% endif %}

@@ -1,0 +1,157 @@
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';
+@import 'utilities/utilities';
+
+/************************************************************************************************
+  FOOTER DEFFAULT
+*************************************************************************************************/
+  footer.typefooter-3{
+
+    /*!
+      *  [6] POPURLAR TAG
+      */
+    .newsletter{
+      background: transparent !important;
+      padding: 0 !important;
+      width: 100% !important;
+      .modcontent{
+        padding: 38px 0 35px;
+      }
+    }
+     .style-dev-so-tags.module h3.modtitle{
+         color: #222;
+         text-transform: capitalize;
+         font-size: 14px;
+         font-weight: bold;
+         margin-bottom: 10px;
+         padding: 0;
+     }
+     .style-dev-so-tags{
+         padding: 20px 0;border-bottom: 1px solid #ddd;
+         @media (min-width: 1200px) {
+             padding: 0px 0 40px;
+         }
+         .
+         a{color: #444;
+             &:after{
+                 content: "|";
+                 display: inline-block;
+                 margin: 0 5px;
+                 color: #ddd;
+             }
+             &:last-child{&:after{display: none;}}
+             &:hover{color: $linkColor;}
+         }
+     }
+
+    @include rem(font-size, 13px);
+     .module h3.modtitle,
+     .module h3.footer-title{
+      font-size: 16px;
+      border: none;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      font-weight: bold;
+      color: #444;
+      padding: 0 0 10px 0;
+      position: relative;
+    }
+    .footer-midde-block1{
+       background: #fff;
+       border-top: 1px solid #ddd;
+       border-bottom: 1px solid #ddd;
+       padding: 0;
+    }
+    &.footer-container{
+      background-color: #eee;
+      
+      .footer-top.footer-top-block{
+        padding-bottom: 15px;
+        .module{ margin-bottom:17px; };
+        p{font-size: 12px;}
+        ul.menu{
+         li{
+            @include transition(all .3s ease 0s);
+            &:hover{ padding-#{$left}: 10px;}
+            a{
+              font-size: 13px;
+              color: #444;
+              font-weight: 500;
+              display: block; 
+              padding: side-values(3px 0px 3px 10px) ;
+              position: relative;
+              &:before{
+                position: absolute;
+                content: "\f0da";
+                font-family: FontAwesome;#{$left}: 0;
+                @include if-rtl {
+                  content: "\f0d9";
+                }
+              }
+              &:hover{color: $linkColor;}
+            }
+          } 
+        }
+        ul.contact-address{
+           margin-bottom: 15px;
+          li{
+            font-size: 14px;
+            font-weight: 500;
+            color: #444;
+            line-height: 28px;
+            .fa{
+              color: $linkColor;
+              font-size: 16px;
+              margin-#{$right}: 5px;
+              &.fa-envelope-o{ font-size: 12px;}
+            }
+          }
+        } 
+        @media (min-width: 1200px) {
+          .collapsed-block.footer-links{
+            width: 25%!important;
+            img{  margin-top: 13px; display: inline-block;  }
+          }
+          .box-account,
+          .box-information,
+          .box-service,
+          .collapsed-block{
+            width: 18.75%;
+          }
+        } 
+      }
+    }
+   
+    .box-social{
+      padding: 40px 0 40px;
+    }
+    .footer-center{
+      .footer-midde-block2{
+        @media (min-width: 1200px) {
+              padding-top: 28px;
+        }
+      }
+    }
+    .footer-bottom { 
+      padding: 20px 0; text-align: center;
+      .copyright-text { color: #444; font-size: 12px; font-weight: 500; }
+    }
+    .footer-top-block hr{clear: both;border-color: $base-border-color;margin: 10px 15px;display: inline-block;width: 100%;}
+     }

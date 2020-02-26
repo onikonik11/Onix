@@ -1,0 +1,9 @@
+<div class="item">
+	<div class="media-body">
+		{% if display_title %}
+			<h4 class="media-heading">
+				<a href="{{ blog.link }}" title="{{ blog.title }}" target="{{ item_link_target }}">{{ blog.title_maxlength }}</a>
+			</h4>
+		{% endif %}
+	</div>
+</div>

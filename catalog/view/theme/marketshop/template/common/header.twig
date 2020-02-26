@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no" />
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<link href="catalog/view/theme/marketshop/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+<script src="catalog/view/theme/marketshop/js/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+{% if marketshop_custom_column_status == 1 or marketshop_video_box_status == 1 or marketshop_facebook_block_status == 1 or marketshop_twitter_block_status == 1 %}
+<script src="catalog/view/theme/marketshop/js/jquery.easing-1.3.min.js" type="text/javascript" ></script>
+{% endif %}
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/stylesheet/stylesheet.min.css" />
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/stylesheet/responsive.min.css" />
+{% if direction == 'rtl' %}
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/js/bootstrap/css/bootstrap-rtl.min.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/stylesheet/stylesheet-rtl.min.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/stylesheet/responsive-rtl.min.css" />
+{% endif %}
+{% if marketshop_skin == 2 %}
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/stylesheet/stylesheet-skin2.min.css" />
+{% elseif marketshop_skin == 3 %}
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/stylesheet/stylesheet-skin3.min.css" />
+{% elseif marketshop_skin == 4 %}
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/marketshop/stylesheet/stylesheet-skin4.min.css" />
+{% endif %}
+<script type="text/javascript" src="catalog/view/theme/marketshop/js/common.min.js"></script>
+<script type="text/javascript" src="catalog/view/theme/marketshop/js/custom.min.js"></script>
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+{% if marketshop_search_auto_complete == 1 %}
+{% if route != 'affiliate/tracking' %}
+<script src="catalog/view/theme/marketshop/js/jquery.autocomplete.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {	
+$("#filter_name").autocomplete("getdata.php?lan={{ lang }}", {
+		width: 260,
+		resultsClass: "ac_results col-lg-4{% if marketshop_header_style == 2 %} style2{% elseif marketshop_header_style == 3 %} style3{% endif %}",
+		matchContains: true
+	});
+});
+</script>
+{% endif %}
+{% endif %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+{% if marketshop_status == 1 or marketshop_title_font or marketshop_body_font or marketshop_top_bar_font or marketshop_secondary_titles_font or marketshop_footer_titles_font or marketshop_main_menu_font %}		
+{% set regfonts = ['', 'Arial', 'Verdana', 'Helvetica', 'Lucida Grande', 'Trebuchet MS', 'Times New Roman', 'Tahoma', 'Georgia'] %}
+{% if marketshop_title_font not in regfonts %}
+<link href='//fonts.googleapis.com/css?family={{ marketshop_title_font }}' rel='stylesheet' type='text/css'>
+{% endif %}
+{% if marketshop_body_font not in regfonts %}
+<link href='//fonts.googleapis.com/css?family={{ marketshop_body_font }}' rel='stylesheet' type='text/css'>
+{% endif %}
+{% if marketshop_top_bar_font not in regfonts %}
+<link href='//fonts.googleapis.com/css?family={{ marketshop_top_bar_font }}' rel='stylesheet' type='text/css'>
+{% endif %}
+{% if marketshop_secondary_titles_font not in regfonts %}
+<link href='//fonts.googleapis.com/css?family={{ marketshop_secondary_titles_font }}' rel='stylesheet' type='text/css'>
+{% endif %}
+{% if marketshop_footer_titles_font not in regfonts %}
+<link href='//fonts.googleapis.com/css?family={{ marketshop_footer_titles_font }}' rel='stylesheet' type='text/css'>
+{% endif %}
+{% if marketshop_main_menu_font not in regfonts %}
+<link href='//fonts.googleapis.com/css?family={{ marketshop_main_menu_font }}' rel='stylesheet' type='text/css'>
+{% endif %}
+{% endif %}
+<style type="text/css">
+{% if _SERVER['HTTPS'] and _SERVER['HTTPS'] != 'off' %}
+ {% set path_image = config_ssl ~ 'image/' %}
+{% else %}
+ {% set path_image = config_url ~ 'image/' %}
+{% endif %}
+body {
+{% if marketshop_body_text_color %}
+color: {{ marketshop_body_text_color }};
+{% endif %}
+{% if marketshop_background_color!='' %}
+background-color:{{ marketshop_background_color }};
+{% endif %}		
+{% if marketshop_custom_image %}
+background-image: url("{{ path_image ~ marketshop_custom_image }}");
+background-position:{{ marketshop_custom_image_position }};
+background-repeat:{{ marketshop_custom_image_repeat }};
+background-attachment:{{ marketshop_custom_image_attachment }};
+{% elseif marketshop_pattern_overlay %}
+background-image: url("catalog/view/theme/marketshop/image/patterns/{{ marketshop_pattern_overlay }}.png");
+{% else %}
+background-image: none;
+{% endif %}
+}
+{% if marketshop_general_links_color %}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+background-color: {{ marketshop_general_links_color }};
+border-color: {{ marketshop_general_links_color }};
+}{% endif %}
+{% if marketshop_general_links_color %}
+a, a b, .articleHeader span a, .pagination > li > a {
+color: {{ marketshop_general_links_color }};
+}
+.owl-carousel.slideshowhome .owl-controls .owl-buttons .owl-prev:hover, .owl-carousel.slideshowhome .owl-controls .owl-buttons .owl-next:hover, .nivo-directionNav .nivo-nextNav:hover, .nivo-directionNav .nivo-prevNav:hover {
+background-color: {{ marketshop_general_links_color }};
+}{% endif %}
+{% if marketshop_general_links_hover_color %}
+a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination > li > a:hover, .breadcrumb a:hover, .login-content .right a:hover, .box-category a:hover, .list-item a:hover, #blogArticle .articleHeader h1 a:hover, #blogCatArticles .articleHeader h3 a:hover, .tags-update .tags a:hover, .articleHeader span a:hover {
+color: {{ marketshop_general_links_hover_color }};
+}{% endif %}
+{% if marketshop_heading_color %}
+#container h1 {
+color: {{ marketshop_heading_color }};
+}{% endif %}
+{% if marketshop_secondary_heading_color %}
+#container h2, #container h3, .product-tab .htabs a, .product-tab .tabs li a {
+color: {{ marketshop_secondary_heading_color }};
+}{% endif %}
+{% if marketshop_secondary_heading_border_color %}
+#container h2, #container h3, .product-tab .htabs a, .product-tab .tabs li.active a, .product-tab .tabs, .category .tabs li.active a {
+border-color: {{ marketshop_secondary_heading_border_color }};
+}{% endif %}
+{% if marketshop_header_margin %}
+#header .header-row {
+padding: {{ marketshop_header_margin }}px 0px;
+}{% endif %}
+/*===== TOP BAR =====*/
+{% if marketshop_top_bar_bg_color %}
+#header .htop, .left-top {
+background-color:{{ marketshop_top_bar_bg_color }};
+}{% endif %}
+{% if marketshop_top_bar_link_color %}
+#header .links > ul > li.mobile, #header .links > ul > li > a, #form-language span, #form-currency span, #header #top-links > ul > li > a, .drop-icon {
+color:{{ marketshop_top_bar_link_color }};
+}{% endif %}
+{% if marketshop_top_bar_link_color %}
+#header .links > ul > li.wrap_custom_block a b {
+border-top-color:{{ marketshop_top_bar_link_color }};
+}{% endif %}
+{% if marketshop_top_bar_link_separator_style and marketshop_top_bar_link_separator_color %}
+#header .links > ul > li, #header #top-links > ul > li {
+border-left:1px {{ marketshop_top_bar_link_separator_style }} {{ marketshop_top_bar_link_separator_color }};
+}{% endif %}
+{% if marketshop_top_bar_link_separator_style and marketshop_top_bar_link_separator_color %}
+#header .links, #form-language, #form-currency, #header #top-links {
+border-right:1px {{ marketshop_top_bar_link_separator_style }} {{ marketshop_top_bar_link_separator_color }}
+}{% endif %}
+{% if marketshop_top_bar_sub_link_color %}
+#top .dropdown-menu li a, #form-currency ul li .currency-select, #form-language ul li .language-select {
+color:{{ marketshop_top_bar_sub_link_color }};
+}{% endif %}
+{% if marketshop_top_bar_sub_link_hover_color %}
+#top .dropdown-menu li a:hover, #form-currency ul li .currency-select:hover, #form-language ul li .language-select:hover {
+color:{{ marketshop_top_bar_sub_link_hover_color }};
+}{% endif %}
+{% if marketshop_header_bg_color %}
+#header .header-row {
+background-color:{{ marketshop_header_bg_color }};
+}{% endif %}
+{% if marketshop_mini_cart_icon_color %}
+#header #cart .heading h4 {
+background-color:{{ marketshop_mini_cart_icon_color }};
+}
+#header #cart .heading h4:after, #header #cart .heading h4:before, #header #cart .dropdown-menu {
+border-color:{{ marketshop_mini_cart_icon_color }};
+}
+#header #cart.open .heading span:after {
+border-color:transparent transparent {{ marketshop_mini_cart_icon_color }};
+}{% endif %}
+
+{% if marketshop_mini_cart_link_color %}
+#header #cart .heading {
+color:{{ marketshop_mini_cart_link_color }};
+}{% endif %}
+{% if marketshop_mini_cart_active_link_color %}
+#header #cart.open .heading {
+color:{{ marketshop_mini_cart_active_link_color }};
+}{% endif %}
+{% if marketshop_search_bar_background_color %}
+#header #search input {
+background-color:{{ marketshop_search_bar_background_color }};
+}{% endif %}
+{% if marketshop_search_bar_border_color %}
+#header #search input {
+border-color:{{ marketshop_search_bar_border_color }};
+}{% endif %}
+{% if marketshop_search_bar_text_color %}
+#header #search input {
+color:{{ marketshop_search_bar_text_color }};
+}{% endif %}
+{% if marketshop_search_bar_border_hover_color %}
+#header #search input:focus, #header #search input:hover {
+border-color:{{ marketshop_search_bar_border_hover_color }};
+}{% endif %}
+{% if marketshop_search_bar_icon_color %}
+#header .button-search {
+color:{{ marketshop_search_bar_icon_color }};
+}{% endif %}
+/*===== MAIN MENU =====*/
+{% if marketshop_main_menu_align == 2 %}
+#menu .navbar-nav {text-align: center;}
+#menu .nav > li {display: inline-block; float: none;}
+{% endif %}
+{% if marketshop_menu_bg_color and marketshop_menu_bg_color_status == 1 %}
+#menu {
+background-color: {{ marketshop_menu_bg_color }};
+}{% endif %}
+{% if marketshop_menu_link_color %}
+#menu .nav > li > a, #menu .navbar-header > span, #menu .nav > li > span.submore:after {
+color: {{ marketshop_menu_link_color }};
+}
+#menu .navbar-header > span > b:before {
+border-color: transparent transparent {{ marketshop_menu_link_color }};
+}
+#menu .navbar-header > span > b:after {
+border-color: {{ marketshop_menu_link_color }} transparent transparent;
+}{% endif %}
+{% if marketshop_menu_link_hover_color %}
+#menu .nav > li:hover > a {
+color: {{ marketshop_menu_link_hover_color }};
+}{% endif %}
+{% if marketshop_menu_link_hover_bg_color %}
+#menu .nav > li:hover > a {
+background-color: {{ marketshop_menu_link_hover_bg_color }};
+}{% endif %}
+{% if marketshop_menu_link_separator_size and marketshop_menu_link_separator_style and marketshop_menu_link_separator_color and marketshop_menu_link_separator_status == 1 %}
+#menu .nav > li + li {
+border-left:{{ marketshop_menu_link_separator_size }}px {{ marketshop_menu_link_separator_style }} {{ marketshop_menu_link_separator_color }};
+}{% endif %}
+{% if marketshop_menu_link_border_top_size and marketshop_menu_link_border_top_style and marketshop_menu_link_border_top_color and marketshop_menu_link_border_top_status == 1 %}
+#menu {
+border-top:{{ marketshop_menu_link_border_top_size }}px {{ marketshop_menu_link_border_top_style }} {{ marketshop_menu_link_border_top_color }}
+}{% endif %}
+{% if marketshop_menu_link_border_top_status == 2 %}
+#menu {
+border-top:none;
+}{% endif %}
+{% if marketshop_menu_link_border_bottom_size and marketshop_menu_link_border_bottom_style and marketshop_menu_link_border_bottom_color and marketshop_menu_link_border_bottom_status == 1 %}
+#menu {
+border-bottom:{{ marketshop_menu_link_border_bottom_size }}px {{ marketshop_menu_link_border_bottom_style }} {{ marketshop_menu_link_border_bottom_color }}
+}{% endif %}
+{% if marketshop_menu_link_border_bottom_status == 2 %}
+#menu {
+border-bottom:none;
+}{% endif %}
+{% if marketshop_sub_menu_background_color %}
+#menu .nav > li.categories_hor > div, #menu .nav > li.categories > div, #menu .nav > li.categories_hor > div .submenu, #menu .nav > li.categories > div > .column > div, #menu .nav > li > .dropdown-menu, #menu .submenu {
+background-color:{{ marketshop_sub_menu_background_color }};
+}{% endif %}
+{% if marketshop_sub_menu_top_border_color %}
+#menu .nav > li.categories_hor > div, #menu .nav > li.categories > div, #menu .nav > li.categories_hor > div .submenu, #menu .nav > li.categories > div > .column > div, #menu .nav > li > .dropdown-menu, #menu .submenu {
+border-color:{{ marketshop_sub_menu_top_border_color }};
+}{% endif %}
+{% if marketshop_sub_menu_top_border_color %}
+#menu .nav > li.sub:hover > a:after {
+border-bottom-color:{{ marketshop_sub_menu_top_border_color }};
+}{% endif %}
+{% if marketshop_sub_menu_heading_text_color %}
+#menu .nav > li.categories_hor > div > .column > a {
+color:{{ marketshop_sub_menu_heading_text_color }};
+}{% endif %}
+{% if marketshop_sub_menu_heading_text_separator_color and marketshop_sub_menu_heading_text_separator_style %}
+#menu .nav > li.categories_hor > div > .column > a {
+border-bottom:1px {{ marketshop_sub_menu_heading_text_separator_style }} {{ marketshop_sub_menu_heading_text_separator_color }};
+}{% endif %}
+{% if marketshop_sub_menu_link_color %}
+#menu .nav > li.categories > div > .column > a, #menu .nav > li div > ul > li > a, #menu .nav > li.menu_brands > div > div a, #menu .custom_block, #menu .custom_block a {
+color: {{ marketshop_sub_menu_link_color }};
+}{% endif %}
+{% if marketshop_sub_menu_link_hover_color %}
+#menu .nav > li.categories > div > .column:hover > a, #menu .nav > li div > ul > li:hover > a, #menu .nav > li.categories_hor > div > .column:hover > a, #menu .nav > li.menu_brands > div > div a:hover, #menu .custom_block a:hover {
+color: {{ marketshop_sub_menu_link_hover_color }};
+}{% endif %}
+{% if marketshop_sub_menu_link_separator_color and marketshop_sub_menu_link_separator_style %}
+#menu .nav > li.categories > div > .column + .column, #menu .nav > li > div > ul li + li, #menu .nav > li.categories > div > .column:hover > div ul li + li, #menu .nav > li.categories_hor > div .submenu ul li + li a {
+border-top:1px {{ marketshop_sub_menu_link_separator_style }} {{ marketshop_sub_menu_link_separator_color }};
+}{% endif %}
+{% if marketshop_home_page_link_background_color %}
+#menu .nav > li > a.home_link {
+background-color: {{ marketshop_home_page_link_background_color }};
+}{% endif %}
+{% if marketshop_home_page_link_background_color_hover %}
+#menu .nav > li > a.home_link:hover {
+background-color: {{ marketshop_home_page_link_background_color_hover }};
+}{% endif %}
+{% if marketshop_home_page_link_link_color %}
+#menu .nav > li > a.home_link {
+color: {{ marketshop_home_page_link_link_color }};
+}{% endif %}
+{% if marketshop_home_page_link_link_color_hover %}
+#menu .nav > li > a.home_link:hover {
+color: {{ marketshop_home_page_link_link_color_hover }};
+}{% endif %}
+{% if marketshop_home_page_link_icon_color %}
+#menu .nav > li > a.home_link span {
+background-color: {{ marketshop_home_page_link_icon_color }};
+}{% endif %}
+{% if marketshop_home_page_link_icon_color %}
+#menu .nav > li > a.home_link span:before {
+border-bottom-color: {{ marketshop_home_page_link_icon_color }};
+}{% endif %}
+{% if marketshop_home_page_link_icon_color %}
+#menu .nav > li > a.home_link span:after {
+border-color: {{ marketshop_home_page_link_icon_color }};
+}{% endif %}
+{% if marketshop_home_page_link_icon_color_hover %}
+#menu .nav > li > a.home_link:hover span {
+background-color: {{ marketshop_home_page_link_icon_color_hover }};
+}{% endif %}
+{% if marketshop_home_page_link_icon_color_hover %}
+#menu .nav > li > a.home_link:hover span:before {
+border-bottom-color: {{ marketshop_home_page_link_icon_color_hover }};
+}{% endif %}
+{% if marketshop_home_page_link_icon_color_hover %}
+#menu .nav > li > a.home_link:hover span:after {
+border-color: {{ marketshop_home_page_link_icon_color_hover }};
+}{% endif %}
+{% if marketshop_categories_section_background_color %}
+#menu .nav > li.categories_defu > a, #menu .nav > li.categories > a, #menu .nav > li.categories_hor > a {
+background-color: {{ marketshop_categories_section_background_color }};
+}{% endif %}
+{% if marketshop_categories_section_background_color_hover %}
+#menu .nav > li.categories:hover > a {
+background-color: {{ marketshop_categories_section_background_color_hover }};
+}{% endif %}
+{% if marketshop_categories_section_link_color %}
+#menu .nav > li.categories > a {
+color: {{ marketshop_categories_section_link_color }};
+}{% endif %}
+{% if marketshop_categories_section_link_color_hover %}
+#menu .nav > li.categories:hover > a {
+color: {{ marketshop_categories_section_link_color_hover }};
+}{% endif %}
+{% if marketshop_brands_section_background_color %}
+#menu .nav > li.menu_brands > a {
+background-color: {{ marketshop_brands_section_background_color }};
+}{% endif %}
+{% if marketshop_brands_section_background_color_hover %}
+#menu .nav > li.menu_brands:hover > a {
+background-color: {{ marketshop_brands_section_background_color_hover }};
+}{% endif %}
+{% if marketshop_brands_section_link_color %}
+#menu .nav > li.menu_brands > a {
+color: {{ marketshop_brands_section_link_color }};
+}{% endif %}
+{% if marketshop_brands_section_link_color_hover %}
+#menu .nav > li.menu_brands:hover > a {
+color: {{ marketshop_brands_section_link_color_hover }};
+}{% endif %}
+{% if marketshop_custom_link_section_background_color %}
+#menu .nav > li.custom-link > a {
+background-color: {{ marketshop_custom_link_section_background_color }};
+}{% endif %}
+{% if marketshop_custom_link_section_background_color_hover %}
+#menu .nav > li.custom-link:hover > a {
+background-color: {{ marketshop_custom_link_section_background_color_hover }};
+}{% endif %}
+{% if marketshop_custom_link_section_link_color %}
+#menu .nav > li.custom-link > a {
+color: {{ marketshop_custom_link_section_link_color }};
+}{% endif %}
+{% if marketshop_custom_link_section_link_color_hover %}
+#menu .nav > li.custom-link:hover > a {
+color: {{ marketshop_custom_link_section_link_color_hover }};
+}{% endif %}
+{% if marketshop_custom_block_section_background_color %}
+#menu .nav > li.wrap_custom_block > a {
+background-color: {{ marketshop_custom_block_section_background_color }};
+}{% endif %}
+{% if marketshop_custom_block_section_background_color_hover %}
+#menu .nav > li.wrap_custom_block:hover > a {
+background-color: {{ marketshop_custom_block_section_background_color_hover }};
+}{% endif %}
+{% if marketshop_custom_block_section_link_color %}
+#menu .nav > li.wrap_custom_block > a {
+color: {{ marketshop_custom_block_section_link_color }};
+}{% endif %}
+{% if marketshop_custom_block_section_link_color_hover %}
+#menu .nav > li.wrap_custom_block:hover > a {
+color: {{ marketshop_custom_block_section_link_color_hover }};
+}{% endif %}
+{% if marketshop_myaccount_section_background_color %}
+#menu .nav > li.my-account-link > a {
+background-color: {{ marketshop_myaccount_section_background_color }};
+}{% endif %}
+{% if marketshop_myaccount_section_background_color_hover %}
+#menu .nav > li.my-account-link:hover > a {
+background-color: {{ marketshop_myaccount_section_background_color_hover }};
+}{% endif %}
+{% if marketshop_myaccount_section_link_color %}
+#menu .nav > li.my-account-link > a {
+color: {{ marketshop_myaccount_section_link_color }};
+}{% endif %}
+{% if marketshop_myaccount_section_link_color_hover %}
+#menu .nav > li.my-account-link:hover > a {
+color: {{ marketshop_myaccount_section_link_color_hover }};
+}{% endif %}
+{% if marketshop_information_section_background_color %}
+#menu .nav > li.information-link > a {
+background-color: {{ marketshop_information_section_background_color }};
+}{% endif %}
+{% if marketshop_information_section_background_color_hover %}
+#menu .nav > li.information-link:hover > a {
+background-color: {{ marketshop_information_section_background_color_hover }};
+}{% endif %}
+{% if marketshop_information_section_link_color %}
+#menu .nav > li.information-link > a {
+color: {{ marketshop_information_section_link_color }};
+}{% endif %}
+{% if marketshop_information_section_link_color %}
+#menu .nav > li.information-link:hover > a {
+color: {{ marketshop_information_section_link_color_hover }};
+}{% endif %}
+{% if marketshop_contact_section_background_color %}
+#menu .nav > li.contact-link > a {
+background-color: {{ marketshop_contact_section_background_color }};
+}{% endif %}
+{% if marketshop_contact_section_background_color_hover %}
+#menu .nav > li.contact-link:hover > a {
+background-color: {{ marketshop_contact_section_background_color_hover }};
+}{% endif %}
+{% if marketshop_contact_section_link_color %}
+#menu .nav > li.contact-link > a {
+color: {{ marketshop_contact_section_link_color }};
+}{% endif %}
+{% if marketshop_contact_section_link_color_hover %}
+#menu .nav > li.contact-link:hover > a {
+color: {{ marketshop_contact_section_link_color_hover }};
+}{% endif %}
+{% if marketshop_custom_link_right_background_color %}
+#menu .nav > li.custom-link-right > a {
+background-color: {{ marketshop_custom_link_right_background_color }};
+}{% endif %}
+{% if marketshop_custom_link_right_background_color_hover %}
+#menu .nav > li.custom-link-right:hover > a {
+background-color: {{ marketshop_custom_link_right_background_color_hover }};
+}{% endif %}
+{% if marketshop_custom_link_right_link_color %}
+#menu .nav > li.custom-link-right > a {
+color: {{ marketshop_custom_link_right_link_color }};
+}{% endif %}
+{% if marketshop_custom_link_right_link_color_hover %}
+#menu .nav > li.custom-link-right:hover > a {
+color: {{ marketshop_custom_link_right_link_color_hover }};
+}{% endif %}
+{% if marketshop_custom_block_bg_color %}
+.custom_side_block_icon {
+background-color: {{ marketshop_custom_block_bg_color }};
+}{% endif %}
+{% if marketshop_custom_block_bg_color %}
+#custom_side_block {
+border-color: {{ marketshop_custom_block_bg_color }};
+}{% endif %}
+/*===== FOOTER =====*/
+{% if marketshop_footer_bg_color %}
+#footer .fpart-first {
+background-color: {{ marketshop_footer_bg_color }};
+}{% endif %}
+{% if marketshop_footer_titles_color %}
+#footer h5 {
+color: {{ marketshop_footer_titles_color }};
+}{% endif %}
+{% if marketshop_footer_text_color %}
+#footer .fpart-first {
+color: {{ marketshop_footer_text_color }};
+}{% endif %}
+{% if marketshop_footer_link_color %}
+#footer .fpart-first a {
+color: {{ marketshop_footer_link_color }};
+}{% endif %}
+{% if marketshop_footer_link_hover_color %}
+#footer .fpart-first a:hover {
+color: {{ marketshop_footer_link_hover_color }};
+}{% endif %}
+{% if marketshop_contact_icon_color %}
+#footer .contact > ul > li > .fa {
+color: {{ marketshop_contact_icon_color }};
+}{% endif %}
+{% if marketshop_footer_second_bg_color %}
+#footer .fpart-second {
+background-color: {{ marketshop_footer_second_bg_color }};
+}{% endif %}
+{% if marketshop_footer_second_text_color %}
+#footer .fpart-second {
+color: {{ marketshop_footer_second_text_color }};
+}{% endif %}
+{% if marketshop_footer_second_link_color %}
+#footer .fpart-second a {
+color: {{ marketshop_footer_second_link_color }};
+}{% endif %}
+{% if marketshop_footer_second_link_hover_color %}
+#footer .fpart-second a:hover {
+color: {{ marketshop_footer_second_link_hover_color }};
+}{% endif %}
+{% if marketshop_footer_second_separator_color and marketshop_footer_second_separator_style %}
+#footer #powered {
+border-bottom:{{ marketshop_footer_second_separator_size }}px {{ marketshop_footer_second_separator_style }} {{ marketshop_footer_second_separator_color }};
+}{% endif %}
+{% if marketshop_footer_backtotop_bg_color %}
+#back-top a:hover {
+background-color: {{ marketshop_footer_backtotop_bg_color }};
+}{% endif %}
+/*===== PRICE =====*/
+{% if marketshop_price_color %}
+.product-thumb .price, .product-info .price {
+color: {{ marketshop_price_color }};
+}{% endif %}
+{% if marketshop_old_price_color %}
+.product-thumb .price-old, .product-info .price-old {
+color: {{ marketshop_old_price_color }};
+}{% endif %}
+{% if marketshop_new_price_color %}
+.product-thumb .price-new, .product-info .price-new {
+color: {{ marketshop_new_price_color }};
+}{% endif %}
+{% if marketshop_tax_price_color %}
+.product-info .price-tax, .product-thumb .price .price-tax {
+color: {{ marketshop_tax_price_color }};
+}{% endif %}
+{% if marketshop_saving_percentage_bg_color %}
+.saving {
+background-color: {{ marketshop_saving_percentage_bg_color }};
+}{% endif %}
+{% if marketshop_saving_percentage_text_color %}
+.saving {
+color: {{ marketshop_saving_percentage_text_color }};
+}{% endif %}
+/*===== BUTTON =====*/
+{% if marketshop_button_bg_color %}
+.btn-primary {
+background-color: {{ marketshop_button_bg_color }};
+}{% endif %}
+{% if marketshop_button_bg_hover_color %}
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+background-color: {{ marketshop_button_bg_hover_color }};
+}{% endif %}
+{% if marketshop_button_text_color %}
+.btn-primary {
+color: {{ marketshop_button_text_color }};
+}{% endif %}
+{% if marketshop_button_text_hover_color %}
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+color: {{ marketshop_button_text_hover_color }};
+}{% endif %}
+/*===== DEFAULT BUTTON =====*/
+{% if marketshop_default_button_bg_color %}
+.btn-default {
+background-color: {{ marketshop_default_button_bg_color }};
+}{% endif %}
+{% if marketshop_default_button_bg_hover_color %}
+.btn-default:hover {
+background-color: {{ marketshop_default_button_bg_hover_color }};
+}{% endif %}
+{% if marketshop_default_button_text_color %}
+.btn-default {
+color: {{ marketshop_default_button_text_color }};
+}{% endif %}
+{% if marketshop_default_button_text_hover_color %}
+.btn-default:hover {
+color: {{ marketshop_default_button_text_hover_color }};
+}{% endif %}
+/*===== AddToCart BUTTONS =====*/
+{% if marketshop_cart_button_bg_color %}
+.product-thumb .button-group > button {
+background-color: {{ marketshop_cart_button_bg_color }};
+}{% endif %}
+{% if marketshop_cart_button_bg_hover_color %}
+.product-thumb .button-group > button:hover {
+background-color: {{ marketshop_cart_button_bg_hover_color }};
+}{% endif %}
+{% if marketshop_cart_button_text_color %}
+.product-thumb .button-group > button {
+color: {{ marketshop_cart_button_text_color }};
+}{% endif %}
+{% if marketshop_cart_button_text_hover_color %}
+.product-thumb .button-group > button:hover {
+color: {{ marketshop_cart_button_text_hover_color }};
+}{% endif %}
+/*===== Exclusive BUTTONS =====*/
+{% if marketshop_excl_button_bg_color %}
+.product-info .cart #button-cart {
+background-color: {{ marketshop_excl_button_bg_color }};
+}{% endif %}
+{% if marketshop_excl_button_bg_hover_color %}
+.product-info .cart #button-cart:hover {
+background-color: {{ marketshop_excl_button_bg_hover_color }};
+}{% endif %}
+{% if marketshop_excl_button_text_color %}
+.product-info .cart #button-cart {
+color: {{ marketshop_excl_button_text_color }};
+}{% endif %}
+{% if marketshop_excl_button_text_hover_color %}
+.product-info .cart #button-cart:hover {
+color: {{ marketshop_excl_button_text_hover_color }};
+}{% endif %}
+{% if marketshop_feature_box1_bg_color %}
+.custom-feature-box .feature-box.fbox_1 {
+background: {{ marketshop_feature_box1_bg_color }};
+}{% endif %}
+{% if marketshop_feature_box1_title_color %}
+.custom-feature-box .feature-box.fbox_1 .title {
+color: {{ marketshop_feature_box1_title_color }};
+}{% endif %}
+{% if marketshop_feature_box1_subtitle_color %}
+.custom-feature-box .feature-box.fbox_1 p {
+color: {{ marketshop_feature_box1_subtitle_color }};
+}{% endif %}
+{% if marketshop_feature_box2_bg_color %}
+.custom-feature-box .feature-box.fbox_2 {
+background: {{ marketshop_feature_box2_bg_color }};
+}{% endif %}
+{% if marketshop_feature_box2_title_color %}
+.custom-feature-box .feature-box.fbox_2 .title {
+color: {{ marketshop_feature_box2_title_color }};
+}{% endif %}
+{% if marketshop_feature_box2_subtitle_color %}
+.custom-feature-box .feature-box.fbox_2 p {
+color: {{ marketshop_feature_box2_subtitle_color }};
+}{% endif %}
+{% if marketshop_feature_box3_bg_color %}
+.custom-feature-box .feature-box.fbox_3 {
+background: {{ marketshop_feature_box3_bg_color }};
+}{% endif %}
+{% if marketshop_feature_box3_title_color %}
+.custom-feature-box .feature-box.fbox_3 .title {
+color: {{ marketshop_feature_box3_title_color }};
+}{% endif %}
+{% if marketshop_feature_box3_subtitle_color %}
+.custom-feature-box .feature-box.fbox_3 p {
+color: {{ marketshop_feature_box3_subtitle_color }};
+}{% endif %}
+{% if marketshop_feature_box4_bg_color %}
+.custom-feature-box .feature-box.fbox_4 {
+background: {{ marketshop_feature_box4_bg_color }};
+}{% endif %}
+{% if marketshop_feature_box4_title_color %}
+.custom-feature-box .feature-box.fbox_4 .title {
+color: {{ marketshop_feature_box4_title_color }};
+}{% endif %}
+{% if marketshop_feature_box4_subtitle_color %}
+.custom-feature-box .feature-box.fbox_4 p {
+color: {{ marketshop_feature_box4_subtitle_color }};
+}{% endif %}
+{% if marketshop_feature_box_title_font_size %}
+.custom-feature-box .feature-box .title {
+font-size:{{ marketshop_feature_box_title_font_size }};
+}{% endif %}
+{% if marketshop_feature_box_title_font_weight %}
+.custom-feature-box .feature-box .title {
+font-weight:{{ marketshop_feature_box_title_font_weight }};
+}{% endif %}
+{% if marketshop_feature_box_title_font_transform %}
+.custom-feature-box .feature-box .title {
+text-transform:{{ marketshop_feature_box_title_font_transform }};
+}{% endif %}
+{% if marketshop_feature_box_subtitle_font_size %}
+.custom-feature-box .feature-box p {
+font-size:{{ marketshop_feature_box_subtitle_font_size }};
+}{% endif %}
+{% if marketshop_feature_box_subtitle_font_weight %}
+.custom-feature-box .feature-box p {
+font-weight:{{ marketshop_feature_box_subtitle_font_weight }};
+}{% endif %}
+{% if marketshop_feature_box_subtitle_font_transform %}
+.custom-feature-box .feature-box p {
+text-transform:{{ marketshop_feature_box_subtitle_font_transform }};
+}{% endif %}
+/*===== FONTS =====*/
+{% if marketshop_body_font %}
+{% set font = marketshop_body_font|replace("+", " ") %}
+body {
+font-family:{{ font }};
+}{% endif %}
+{% if marketshop_title_font %}
+{% set font = marketshop_title_font|replace("+", " ") %}
+#container h1 {
+font-family:{{ font }};
+}{% endif %}
+{% if marketshop_title_font_size %}
+#container h1 {
+font-size:{{ marketshop_title_font_size }};
+}{% endif %}
+{% if marketshop_title_font_weight %}
+#container h1 {
+font-weight:{{ marketshop_title_font_weight }};
+}{% endif %}
+{% if marketshop_title_font_uppercase %}
+#container h1 {
+text-transform:{{ marketshop_title_font_uppercase }};
+}{% endif %}
+{% if marketshop_main_menu_font %}
+{% set font = marketshop_main_menu_font|replace("+", " ") %}
+#menu {
+font-family:{{ font }};
+}{% endif %}
+{% if marketshop_main_menu_font_size %}
+#menu .nav > li > a {
+font-size:{{ marketshop_main_menu_font_size }};
+}{% endif %}
+{% if marketshop_main_menu_font_weight %}
+#menu .nav > li > a {
+font-weight:{{ marketshop_main_menu_font_weight }};
+}{% endif %}
+{% if marketshop_main_menu_font_uppercase %}
+#menu .nav > li > a {
+text-transform:{{ marketshop_main_menu_font_uppercase }};
+}{% endif %}
+{% if marketshop_top_bar_font %}
+{% set font = marketshop_top_bar_font|replace("+", " ") %}
+#header .htop {
+font-family:{{ font }};
+}{% endif %}
+{% if marketshop_top_bar_font_size %}
+#header .links > ul > li.mobile, #header #top-links > ul > li > a, #header .links ul li a, #form-language span, #form-currency span, #header .links .wrap_custom_block > a {
+font-size:{{ marketshop_top_bar_font_size }};
+}{% endif %}
+{% if marketshop_top_bar_font_weight %}
+#header .links > ul > li.mobile, #header #top-links > ul > li > a, #header .links ul li a, #form-language span, #form-currency span, #header .links .wrap_custom_block > a {
+font-weight:{{ marketshop_top_bar_font_weight }};
+}{% endif %}
+{% if marketshop_top_bar_font_uppercase %}
+#header .links > ul > li.mobile, #header #top-links > ul > li > a, #header .links ul li a, #form-language span, #form-currency span, #header .links .wrap_custom_block > a {
+text-transform:{{ marketshop_top_bar_font_uppercase }};
+}{% endif %}
+{% if marketshop_secondary_titles_font %}
+{% set font = marketshop_secondary_titles_font|replace("+", " ") %}
+#container h2, #container h3, .product-tab .htabs a, .product-tab .tabs li a {
+font-family:{{ font }};
+}{% endif %}
+{% if marketshop_secondary_titles_font_size %}
+#container h2, #container h3, .product-tab .htabs a, .product-tab .tabs li a {
+font-size:{{ marketshop_secondary_titles_font_size }};
+}{% endif %}
+{% if marketshop_secondary_titles_font_weight %}
+#container h2, #container h3, .product-tab .htabs a, .product-tab .tabs li a {
+font-weight:{{ marketshop_secondary_titles_font_weight }};
+}{% endif %}
+{% if marketshop_secondary_titles_font_uppercase %}
+#container h2, #container h3, .product-tab .htabs a, .product-tab .tabs li a {
+text-transform:{{ marketshop_secondary_titles_font_uppercase }};
+}{% endif %}
+{% if marketshop_footer_titles_font %}
+{% set font = marketshop_footer_titles_font|replace("+", " ") %}
+#footer h5 {
+font-family:{{ font }};
+}{% endif %}
+{% if marketshop_footer_titles_font_size %}
+#footer h5 {
+font-size:{{ marketshop_footer_titles_font_size }};
+}{% endif %}
+{% if marketshop_footer_titles_font_weight %}
+#footer h5 {
+font-weight:{{ marketshop_footer_titles_font_weight }};
+}{% endif %}
+{% if marketshop_footer_titles_font_uppercase %}
+#footer h5 {
+text-transform:{{ marketshop_footer_titles_font_uppercase }};
+}{% endif %}
+{% if marketshop_custom_css %}
+{{ marketshop_custom_css }}
+}{% endif %}
+@media screen and (max-width:800px) {
+{% if marketshop_top_bar_bg_color %}
+.left-top {
+background-color:{{ marketshop_top_bar_bg_color }};
+}{% endif %}
+{% if marketshop_main_menu_align and direction == 'ltr' and marketshop_main_menu_align == 2 %}
+#menu .navbar-nav {
+text-align: left;
+}
+#menu .nav > li {
+display:block;
+}{% endif %}
+{% if marketshop_main_menu_align and direction == 'rtl' and marketshop_main_menu_align == 2 %}
+#menu .navbar-nav {
+text-align: right;
+}
+#menu .nav > li {
+display:block;
+}{% endif %}
+{% if marketshop_menu_link_color %}
+#menu > span {
+color: {{ marketshop_menu_link_color }};
+}{% endif %}
+{% if marketshop_menu_link_color %}
+#menu > span:before {
+border-bottom-color: {{ marketshop_menu_link_color }};
+}{% endif %}
+{% if marketshop_menu_link_color %}
+#menu > span:after {
+border-top-color: {{ marketshop_menu_link_color }};
+}{% endif %}
+{% if marketshop_menu_link_border_bottom_size and marketshop_menu_link_border_bottom_style and marketshop_menu_link_border_bottom_color and marketshop_menu_link_border_bottom_status == 1 %}
+#menu .nav {
+border-top:{{ marketshop_menu_link_border_bottom_size }}px {{ marketshop_menu_link_border_bottom_style }} {{ marketshop_menu_link_border_bottom_color }};
+}{% endif %}
+}
+</style>
+</head>
+<body>
+{% if marketshop_layout_style == 1 %}
+<section class="wrapper-wide">
+{% else %}
+<section class="wrapper-box">
+{% endif %}
+{% if marketshop_header_style == 1 %}
+<div id="header" >
+{% elseif marketshop_header_style == 2 %}
+<div id="header" class="style2">
+{% elseif marketshop_header_style == 3 %}
+<div id="header" class="style3">
+{% endif %}
+  <nav class="htop" id="top">
+    <div class="{% if marketshop_layout_style == 1 %}container{% else %}container-fluid{% endif %}">
+      <div class="row"> <span class="drop-icon visible-sm visible-xs"><i class="fa fa-align-justify"></i></span>
+        <div class="pull-left flip left-top">
+          {% set lang = config_language_id %}
+          <div class="links">
+            <ul>
+            {% if marketshop_top_bar_contact_status == 1 and marketshop_top_bar_contact[lang] != '' %}
+              <li class="mobile"><i class="fa fa-phone"></i>{{ marketshop_top_bar_contact[lang] }}</li>
+              {% endif %}
+             {% if marketshop_top_bar_email_status == 1 and marketshop_top_bar_email[lang] != '' %}
+            <li class="email"><a href="mailto:{{ marketshop_top_bar_email[lang] }}"><i class="fa fa-envelope"></i>{{ marketshop_top_bar_email[lang] }}</a></li>
+              {% endif %}
+              {% if marketshop_custom_link1_top == 1 and marketshop_custom_link1_top_title[lang] != '' %}
+              <li><a href="{{ marketshop_custom_link1_top_url }}" target="{{ marketshop_target_link1_top }}"> {{ marketshop_custom_link1_top_title[lang] }}</a></li>
+                {% endif %}
+                {% if marketshop_custom_link2_top == 1 and marketshop_custom_link2_top_title[lang] != '' %}                
+                <li><a href="{{ marketshop_custom_link2_top_url }}" target="{{ marketshop_target_link2_top }}"> {{ marketshop_custom_link2_top_title[lang] }}</a></li>
+                {% endif %}
+                {% if marketshop_custom_link3_top == 1 and marketshop_custom_link3_top_title[lang] != '' %}
+                <li><a href="{{ marketshop_custom_link3_top_url }}" target="{{ marketshop_target_link3_top }}"> {{ marketshop_custom_link3_top_title[lang] }}</a></li>
+                {% endif %}
+                {% if marketshop_custom_block_top_status == 1 and marketshop_custom_block_top_title[lang] != '' %}
+                <li class="wrap_custom_block hidden-sm hidden-xs"><a>{{ marketshop_custom_block_top_title[lang] }}<b></b></a>
+                  <div class="custom_block">
+                    <ul>
+           {% if marketshop_custom_block_top_content %}
+               <li>{{ marketshop_custom_block_top_content }}
+               </li>
+               {% endif %}
+                    </ul>
+                  </div>
+                </li>
+                {% endif %}
+                {% if marketshop_custom_block2_top_status == 1 and marketshop_custom_block2_top_title[lang] != '' %}
+                <li class="wrap_custom_block hidden-sm hidden-xs"><a>{{ marketshop_custom_block2_top_title[lang] }}<b></b></a>
+                  <div class="custom_block">
+                    <ul>
+           {% if marketshop_custom_block2_top_content %}
+               <li>{{ marketshop_custom_block2_top_content }}</li>
+               {% endif %}
+                    </ul>
+                  </div>
+                </li>
+                {% endif %}
+                {% if marketshop_wishlist_top_link == 1 %}
+                <li><a href="{{ wishlist }}" id="wishlist-total">{{ text_wishlist }}</a></li>
+                {% endif %}
+                {% if marketshop_checkout_top_link == 1 %}
+                <li><a href="{{ checkout }}">{{ text_checkout }}</a></li>
+                {% endif %}
+            </ul>
+          </div>
+          {{ language }} {{ currency }} </div>
+        <div id="top-links" class="nav pull-right flip">
+          <ul>
+            {% if logged %}
+            <li id="my_account" class="dropdown"><a href="{{ account }}">{{ text_account }} <i class="fa fa-caret-down"></i></a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="{{ account }}">{{ text_account }}</a></li>
+                <li><a href="{{ order }}">{{ text_order }}</a></li>
+                <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                <li><a href="{{ download }}">{{ text_download }}</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+            {% else %}
+            <li><a href="{{ login }}">{{ text_login }}</a></li>
+            <li><a href="{{ register }}">{{ text_register }}</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <header class="header-row">
+    <div class="container">
+      {% if marketshop_header_style == 1 %}
+      <div class="table-container">
+        <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12 inner">
+          <div id="logo">
+        {% if logo %}
+        <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>
+        {% else %}
+          <h1><a href="{{ home }}">{{ name }}</a></h1>
+          {% endif %}
+          </div>
+        </div>
+        <div class="col-table-cell col-lg-3 col-md-3 col-sm-6 col-xs-12"> {{ cart }} </div>
+        <div class="col-table-cell col-lg-3 col-md-3 col-sm-6 col-xs-12 inner"> {{ search }} </div>
+      </div>
+      {% elseif marketshop_header_style == 2 %}
+      <div class="table-container">
+        <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner"> {{ cart }} </div>
+        <div class="col-table-cell col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div id="logo">
+        {% if logo %}
+        <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>
+        {% else %}
+          <h1><a href="{{ home }}">{{ name }}</a></h1>
+          {% endif %}
+          </div>
+        </div>
+        <div class="col-table-cell col-lg-3 col-md-3 col-sm-12 col-xs-12 inner"> {{ search }} </div>
+      </div>
+      {% elseif marketshop_header_style == 3 %}
+      <div class="table-container">
+        <div class="col-table-cell col-lg-4 col-md-4 col-sm-12 col-xs-12 inner">
+          <div id="logo">
+        {% if logo %}
+        <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>
+        {% else %}
+          <h1><a href="{{ home }}">{{ name }}</a></h1>
+          {% endif %}
+          </div>
+        </div>
+        <div class="col-table-cell col-lg-5 col-md-5 col-md-push-0 col-sm-6 col-sm-push-6 col-xs-12"> {{ search }} </div>
+        <div class="col-table-cell col-lg-3 col-md-3 col-md-pull-0 col-sm-6 col-sm-pull-6 col-xs-12 inner"> {{ cart }} </div>
+      </div>
+      {% endif %}
+    </div>
+  </header>
+  {{ menu }}
+</div>
+<div id="container">
+{% if marketshop_feature_box_per_row == 'pr1' %}
+{% set class_fbox = 'col-xs-12' %}
+{% elseif marketshop_feature_box_per_row == 'pr2' %}
+{% set class_fbox = 'col-sm-6 col-xs-12' %}
+{% elseif marketshop_feature_box_per_row == 'pr3' %}
+{% set class_fbox = 'col-sm-4 col-xs-12' %}
+{% elseif marketshop_feature_box_per_row == 'pr4' %}
+{% set class_fbox = 'col-md-3 col-sm-6 col-xs-12' %}
+{% endif %}
+
+{% if marketshop_feature_box_homepage_only == 1 and ishome or marketshop_feature_box_homepage_only == 2 %}
+{% if marketshop_feature_box_show_header_footer == 1 %}
+
+{% if (marketshop_feature_box1_title[lang] and marketshop_feature_box1_title[lang] != '' or marketshop_feature_box1_subtitle[lang] and marketshop_feature_box1_subtitle[lang] != '' or marketshop_feature_box2_title[lang] and marketshop_feature_box2_title[lang] != '' or marketshop_feature_box2_subtitle[lang] and marketshop_feature_box2_subtitle[lang] != '' or marketshop_feature_box3_title[lang] and marketshop_feature_box3_title[lang] != '' or marketshop_feature_box3_subtitle[lang] and marketshop_feature_box3_subtitle[lang] != '' or marketshop_feature_box4_title[lang] and marketshop_feature_box4_title[lang] != '' or marketshop_feature_box4_subtitle[lang] and marketshop_feature_box4_subtitle[lang] != '' ) %}
+ 
+<div class="container">
+  <div class="custom-feature-box row">
+    {% if marketshop_feature_box1_status == 1 %}
+    {% if marketshop_feature_box1_title[lang] and marketshop_feature_box1_title[lang] != '' or  marketshop_feature_box1_subtitle[lang] and marketshop_feature_box1_subtitle[lang] != '' %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_1">
+        <div class="title">{{ marketshop_feature_box1_title[lang] }}</div>
+        <p>{{ marketshop_feature_box1_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    
+    {% if marketshop_feature_box2_status == 1 %}
+    {% if marketshop_feature_box2_title[lang] and marketshop_feature_box2_title[lang] != '' or marketshop_feature_box2_subtitle[lang] and marketshop_feature_box2_subtitle[lang] != '' %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_2">
+        <div class="title">{{ marketshop_feature_box2_title[lang] }}</div>
+        <p>{{ marketshop_feature_box2_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    
+    {% if marketshop_feature_box3_status == 1 %}
+    {% if marketshop_feature_box3_title[lang] and marketshop_feature_box3_title[lang] != '' or marketshop_feature_box3_subtitle[lang] and marketshop_feature_box3_subtitle[lang] != '' %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_3">
+        <div class="title">{{ marketshop_feature_box3_title[lang] }}</div>
+        <p>{{ marketshop_feature_box3_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    
+    {% if marketshop_feature_box4_status == 1 %}
+    {% if marketshop_feature_box4_title[lang] and marketshop_feature_box4_title[lang] != '' or marketshop_feature_box4_subtitle[lang] and marketshop_feature_box4_subtitle[lang] != '' %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_4">
+        <div class="title">{{ marketshop_feature_box4_title[lang] }}</div>
+        <p>{{ marketshop_feature_box4_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}

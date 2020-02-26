@@ -1,0 +1,12 @@
+{% if layout == "layout_default" %}
+	{% include theme_directory~'/template/extension/module/so_newletter_custom_popup/default_layout_default.twig'  %}
+{% elseif layout == "layout_home2" %}
+	{% include theme_directory~'/template/extension/module/so_newletter_custom_popup/default_layout_home2.twig'  %}
+{% elseif layout == "layout_home4" %}
+	{% include theme_directory~'/template/extension/module/so_newletter_custom_popup/default_layout_home4.twig'  %}
+{% elseif layout == "layout_home5" %}
+	{% include theme_directory~'/template/extension/module/so_newletter_custom_popup/default_layout_home5.twig'  %}
+{% else %}
+	{% include theme_directory~'/template/extension/module/so_newletter_custom_popup/default_layout_popup.twig' %}
+{% endif %}
+

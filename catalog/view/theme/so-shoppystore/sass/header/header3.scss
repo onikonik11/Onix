@@ -1,0 +1,249 @@
+/*============HEADER V1 ==================*/
+
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';
+@import 'utilities/utilities';
+
+/*===============================================
+    [SASS DIRECTORY ]
+    
+    [1] BLOCK HEADER
+    [2] BLOCK FOOTER
+    
+==============================================*/
+
+/*============HEADER V3 ==================*/
+.typeheader-3{
+  
+    .header-top-left{
+        padding: 4px 15px;
+        .navbar-phone{padding-#{$right}: 5px;}
+    } 
+    .header-top{background:#f7f7f7;border-bottom: 1px solid #ddd;
+        .btn-group .btn-link{
+            padding: 0 10px;
+        }
+    }
+   
+   
+    #my_account .dropdown-toggle {
+        font-size: 12px;
+        background: transparent;
+    }
+    ul.top-link .checkout > a, .wishlist > a {
+        font-size: 12px;
+        background: transparent;
+    }
+   
+    .currencies-block .btn-group .btn-link{
+        padding: 0 10px !important;
+        font-size: 12px;
+    }
+    .languages-block .btn-group .btn-link {
+        font-size: 12px;
+        padding-top:0;
+        padding-bottom: 0;
+    }
+
+     .header-center{background: #fff;padding: 30px 0;
+        &.center{
+        .navbar-logo{margin-bottom: 30px;}
+        .header-center-right{width: 100%;text-align: center;}
+        }
+        &.left{
+        .header-center-right{text-align: $right;}
+        }
+    }
+    
+    .header-bottom{
+        background: #fff;
+        .navbar-menu{
+            display: table;
+            background: $background;
+            position: relative;
+            width: 100%;
+            .menu-vertical{padding: 0;}
+            .megamenu-style-dev.menu-vetical{ width: 100%; display: inline-block; float: $left;background: darken($background,10%)}
+        } 
+        .cl-padding{width: 100%;padding: 0;}
+        .shopping_cart{position: absolute; min-width: 195px;  border-#{$left}: 1px solid rgba(255, 255, 255, 0.3); #{$right}: 0; top: 0;
+            .shopcart{padding: 15px 0;}
+        }
+        #cart .dropdown-menu{margin-#{$right}:0;}
+    }
+    @media screen and (min-width:0\0) {
+        .rtl .horizontal ul.megamenu > li > .sub-menu{
+            right: 0!important;
+            left: auto;
+        }
+    }
+    
+    .header-top-right{text-align:$right;}
+    .navbar-phone,.navbar-welcome {color: #444;font-size: 12px;
+        i{margin: 0 5px;color: $linkColor;}
+    }
+    .navbar-compact .header-bottom {margin: 0;}
+    .navbar-main-menu-outer{background:#333;margin-bottom: 30px;}
+    
+    .header-top-right {display: inline-block;
+        ul.top-link{list-style: none;margin:0; vertical-align:top;margin-bottom: -8px;
+            > li{display: inline-block; list-style: outside none none;padding: 0;
+                &:after{
+                    content: "";
+                    height: 20px;
+                    width: 1px;
+                    background: #ddd;
+                    display: inline-block;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    -moz-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                    #{$right}: 0;
+                }
+                &:last-child{
+                    &:after{display: none;}
+                }
+                &.wishlist,
+                &.account{
+                    padding: 1px 10px;
+                }
+                
+            }
+        }
+    }
+    
+    /*== [2] SO SEARCH ==*/
+    #search  { visibility: hidden;
+        .btn-default {
+            margin: 0;
+            background-color: #e7e7e7;
+          
+        }
+    }
+    
+    #sosearchpro{
+        width: 100%;
+        .search{ border: 1px solid #ddd;}
+        .dropdown-menu {#{$left}:0px;}
+        .select_category {
+            border: none;width:30%;
+            border-#{$right}: 1px solid $table-border-color ;
+        }
+        .icon-select:after {
+            content: "\f0d7";
+            height: 13px;
+            width: 13px;
+            top: 50%;
+            margin-top: -7px;
+            border: 1px solid #ddd;
+            border-radius: 13px;
+            font-size: 12px;
+            color: #999;
+            z-index: 3;
+            line-height: 12px;
+            #{$right}: -7px;
+            #{$left}: auto;
+        }
+        .form-control{
+            border: none;
+            height: 40px;
+            background: white;
+            padding: 9px 20px;
+            @include rem(font-size, 12px);
+        }
+        .button-search{padding: 8px 10px;border-radius: 0;background: transparent;color: $input-color-placeholder;font-size: 14px;}
+        
+    }
+   
+    
+    
+    /*== [3] SO MEGA MENU ==*/
+    .megamenu-style-dev{
+       
+        .vertical ul.megamenu > li > .sub-menu{
+            top: 0!important;
+        }
+        .navbar-default{
+            background: none;
+            .vertical-wrapper{
+                    display: none;
+                    z-index: 2;
+                }
+            &:hover{
+                .vertical-wrapper{
+                    display: block!important;
+                }
+            }
+            .horizontal{
+                .megamenu-wrapper{background: none;
+                   
+                    ul.megamenu > li > a{
+                        font-weight: normal;
+                        font-size: 14px;
+                        text-transform: uppercase;
+                        color: #fff;
+                        text-shadow: none;
+                        padding: 15px 9px;
+                        height: auto;
+                        margin: 0 1px;
+                    }
+                    ul.megamenu > li.home > a,ul.megamenu > li.active > a{background: $background1;}
+                    ul.megamenu > li > a:hover,
+                    ul.megamenu > li:hover > a{
+                        background: darken($background1, 6%);
+                       
+                    }
+                }
+            }
+            .vertical {
+                #menuHeading{cursor: pointer;
+                    .megamenuToogle-wrapper{background: none;
+                        .container{
+                            padding: 15px !important;
+                            text-transform: uppercase;
+                            > div{
+                                margin: side-values(3px 9px 0 0);
+                                float: $left;
+                            }
+                        }
+                    }
+                }
+                .vertical-wrapper{
+                    display: none;
+                    border-width: side-values(0 1px 1px 1px);
+                    border-style: solid;
+                    border-color: #ddd;
+                    margin: 0;
+                    padding: 0;
+                    box-shadow: none;
+                    border-radius: 0;
+                    position: absolute;
+                    top: 100%;
+                    width: 100%;
+                    ul.megamenu > li > a img{height: auto;}
+                    
+                }
+            }
+        }
+    }
+    
+}

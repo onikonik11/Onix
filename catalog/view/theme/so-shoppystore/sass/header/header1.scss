@@ -1,0 +1,155 @@
+/*============HEADER V1 ==================*/
+
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';
+@import 'utilities/utilities';
+
+/*===============================================
+	[SASS DIRECTORY ]
+	
+    [1] BLOCK HEADER
+    [2] BLOCK FOOTER
+	
+==============================================*/
+
+/*============HEADER V1 ==================*/
+header.typeheader-1{
+    .header-top-left{padding: 5px 15px; }
+    .header-top-right{
+        .top-link > li{padding: 0;vertical-align: middle;position: relative;
+
+            &:last-child:after{display: none;}
+            &:after{
+                content: "";
+                height: 15px; vertical-align: middle;
+                border-#{$left}: 1px solid #ccc;
+                position: absolute;
+                #{$right}: -1px;
+                top: 5px;
+            }
+             &.wishlist{
+                padding: 0 12px;
+                padding-#{$right}: 12px;
+            }
+            &.currency{
+                &:after{
+                    top: 10px;
+                }
+            }
+            &.account{
+                padding-#{$right}: 7px;
+                
+            }
+            &.language{
+                .btn-link{
+                    padding-#{$right}: 0;
+                }
+
+            }
+          
+        }
+    }
+   
+    .header-top{
+        border-bottom: 1px solid #e2e2e2;
+           @include rem(font-size, 12px);
+        .btn-link{ @include linkGray(); @include rem(font-size, 12px);
+            &:hover{background: transparent;}
+        }
+        button{padding: 3px 10px;}
+    }
+    .header-center{padding: 10px 0 22px; background: $background_header1;
+        .shopping_cart, .mega-horizontal {
+            margin-top: 15px;
+        }
+    }
+   
+    .header-bottom{background: $background_header1;
+        .content_menu{
+            padding-#{$left}:0;
+            @include rem(font-size, 12px);
+            margin-#{$left}: -15px;
+            @include calc(width, "75% + 15px");
+            
+            .search {padding: 6px;background: $gray-dark;}
+        }
+    }
+    
+    
+    //------ BLOCK SEARCH ------ 
+    #search  { visibility: hidden;
+        .btn-default {
+            margin: 0;
+            background-color: #e7e7e7;
+          
+        }
+    }
+    
+    #sosearchpro{
+        width: 100%;
+        padding: 0;
+        .dropdown-menu {#{$left}:182px;}
+        .select_category {
+            border: none;width:20%;
+            border-#{$right}: 1px solid $table-border-color ;
+        }
+        .icon-select:after {
+            content: "\f0d7";
+            height: 13px;
+            width: 13px;
+            top: 50%;
+            margin-top: -7px;
+            border: 1px solid #ddd;
+            border-radius: 13px;
+            font-size: 12px;
+            color: #999;
+            z-index: 3;
+            line-height: 12px;
+            #{$right}: -7px;
+            #{$left}: auto;
+        }
+        .form-control{
+            height: 40px;
+            background: white;
+            padding: 9px 20px;
+            @include rem(font-size, 12px);
+        }
+        .button-search{padding: 8px 10px;border-radius: 0;height: 40px;}
+        
+    }
+    
+    //------  Shopping Cart  ------ 
+    .title-cart-h6{
+        display: none;
+    }
+    .btn-shopping-cart {
+        > a{display: block; position: relative; box-shadow: none !important; text-decoration: none !important;padding: 2px;border: 1px solid #ddd;background: #fff;
+            .shopcart{
+             padding: 6px;
+             border: 1px solid #ddd;
+             .title{color: #444;font-weight: bold;text-transform: uppercase;}
+             .text-shopping-cart{color: #444;font-size: 12px;text-transform: uppercase;margin: 0;white-space: nowrap}
+            }
+            .handle{background: url("#{$imgPath}styling/#{$imagePath}/icon-cart.png") no-repeat  center; width: 40px; height: 22px;}
+        }
+       
+    }             
+}
+

@@ -1,0 +1,217 @@
+<div id="product-tab-{{ module }}" class="product-tab">
+<ul id="tabs-{{ module }}" class="tabs clearfix">
+    {% if products and featured_products_status == 1 %}
+    <li><a href="#tab-featured-{{ module }}">{{ tab_featured }}</a></li>
+    {% endif %}
+    {% if latest_products and latest_products_status == 1 %}
+    <li><a href="#tab-latest-{{ module }}">{{ tab_latest }}</a></li>
+    {% endif %}
+    {% if bestseller_products and bestseller_products_status == 1 %}
+    <li><a href="#tab-bestseller-{{ module }}">{{ tab_bestseller }}</a></li>
+    {% endif %}
+    {% if special_products and special_products_status == 1 %}
+    <li><a href="#tab-special-{{ module }}">{{ tab_special }}</a></li>
+    {% endif %}
+  </ul>
+  {% if products and featured_products_status == 1 %}
+  <div id="tab-featured-{{ module }}" class="tab_content">
+    <div class="owl-carousel product_carousel_tab">
+      {% for product in products %}
+      <div class="product-thumb">
+        <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+        <div class="caption">
+          <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+          {% if product.price %}
+        <p class="price">
+          {% if not product.special %}
+          {{ product.price }}
+          {% else %}
+          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+          {% if marketshop_percentage_discount_badge == 1 %}
+            <span class="saving">-{{ product.saving }}%</span>
+            {% endif %}
+          {% endif %}
+        </p>
+        {% endif %}
+          {% if product.rating %}
+        <div class="rating">
+          {% for i in 1..5 %}
+          {% if product.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        </div>
+        <div class="button-group">
+          <button class="btn-primary" type="button" onclick="cart.add('{{ product.product_id }}');"><span>{{ button_cart }}</span></button>
+          <div class="add-to-links">
+            <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+            <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product['product_id'] }}');"><i class="fa fa-exchange"></i></button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% if latest_products and latest_products_status == 1 %}
+  <div id="tab-latest-{{ module }}" class="tab_content">
+    <div class="owl-carousel product_carousel_tab">
+      {% for product in latest_products %}
+      <div class="product-thumb">
+        <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+        <div class="caption">
+          <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+          {% if product.price %}
+        <p class="price">
+          {% if not product.special %}
+          {{ product.price }}
+          {% else %}
+          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+          {% if marketshop_percentage_discount_badge == 1 %}
+            <span class="saving">-{{ product.saving }}%</span>
+            {% endif %}
+          {% endif %}
+        </p>
+        {% endif %}
+          {% if product.rating %}
+        <div class="rating">
+          {% for i in 1..5 %}
+          {% if product.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        </div>
+        <div class="button-group">
+          <button class="btn-primary" type="button" onclick="cart.add('{{ product.product_id }}');"><span>{{ button_cart }}</span></button>
+          <div class="add-to-links">
+            <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+            <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product['product_id'] }}');"><i class="fa fa-exchange"></i></button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% if bestseller_products and bestseller_products_status == 1 %}
+  <div id="tab-bestseller-{{ module }}" class="tab_content">
+    <div class="owl-carousel product_carousel_tab">
+      {% for product in bestseller_products %}
+      <div class="product-thumb">
+        <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+        <div class="caption">
+          <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+          {% if product.price %}
+        <p class="price">
+          {% if not product.special %}
+          {{ product.price }}
+          {% else %}
+          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+          {% if marketshop_percentage_discount_badge == 1 %}
+            <span class="saving">-{{ product.saving }}%</span>
+            {% endif %}
+          {% endif %}
+        </p>
+        {% endif %}
+          {% if product.rating %}
+        <div class="rating">
+          {% for i in 1..5 %}
+          {% if product.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        </div>
+        <div class="button-group">
+          <button class="btn-primary" type="button" onclick="cart.add('{{ product.product_id }}');"><span>{{ button_cart }}</span></button>
+          <div class="add-to-links">
+            <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+            <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product['product_id'] }}');"><i class="fa fa-exchange"></i></button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% if special_products and special_products_status == 1 %}
+  <div id="tab-special-{{ module }}" class="tab_content">
+    <div class="owl-carousel product_carousel_tab">
+    {% for product in special_products %}
+      <div class="product-thumb">
+        <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+        <div class="caption">
+          <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+          {% if product.price %}
+        <p class="price">
+          {% if not product.special %}
+          {{ product.price }}
+          {% else %}
+          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+          {% if marketshop_percentage_discount_badge == 1 %}
+            <span class="saving">-{{ product.saving }}%</span>
+            {% endif %}
+          {% endif %}
+        </p>
+        {% endif %}
+          {% if product.rating %}
+        <div class="rating">
+          {% for i in 1..5 %}
+          {% if product.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+        </div>
+        <div class="button-group">
+          <button class="btn-primary" type="button" onclick="cart.add('{{ product.product_id }}');"><span>{{ button_cart }}</span></button>
+          <div class="add-to-links">
+            <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+            <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product['product_id'] }}');"><i class="fa fa-exchange"></i></button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+$("#product-tab-{{ module }} .product_carousel_tab").owlCarousel({
+		itemsCustom : [[320, 2],[600, 3],[768, 3],[992, {{ marketshop_product_tab_slider_product_per_row }}],[1199, {{ marketshop_product_tab_slider_product_per_row }}]],											   
+		lazyLoad : true,
+		navigation : true,
+		navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+		scrollPerPage : true
+    });
+$("#product-tab-{{ module }} .tab_content").addClass("deactive");
+$("#product-tab-{{ module }} .tab_content:first").show();
+    //Default Action
+    $("ul#tabs-{{ module }} li:first").addClass("active").show(); //Activate first tab
+    //On Click Event
+    $("ul#tabs-{{ module }} li").click(function() {
+        $("ul#tabs-{{ module }} li").removeClass("active"); //Remove any "active" class
+        $(this).addClass("active"); //Add "active" class to selected tab
+		$("#product-tab-{{ module }} .tab_content").hide(); 
+        var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+        $(activeTab).fadeIn(); //Fade in the active content
+        return false;
+    });
+});
+</script>
+

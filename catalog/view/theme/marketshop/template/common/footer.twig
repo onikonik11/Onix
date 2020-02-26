@@ -1,0 +1,569 @@
+</div>
+{% set lang = config_language_id %}
+{% if marketshop_feature_box_per_row == 'pr1' %}
+{% set class_fbox = 'col-xs-12' %}
+{% elseif marketshop_feature_box_per_row == 'pr2' %}
+{% set class_fbox = 'col-sm-6 col-xs-12' %}
+{% elseif marketshop_feature_box_per_row == 'pr3' %}
+{% set class_fbox = 'col-sm-4 col-xs-12' %}
+{% elseif marketshop_feature_box_per_row == 'pr4' %}
+{% set class_fbox = 'col-md-3 col-sm-6 col-xs-12' %}
+{% endif %}
+{% if marketshop_feature_box_homepage_only == 1 and ishome or marketshop_feature_box_homepage_only == 2 %}
+{% if marketshop_feature_box_show_header_footer == 2 %}
+
+{% if (marketshop_feature_box1_title[lang] or marketshop_feature_box1_subtitle[lang] or marketshop_feature_box2_title[lang] or marketshop_feature_box2_subtitle[lang] or marketshop_feature_box3_title[lang] or marketshop_feature_box3_subtitle[lang] or marketshop_feature_box4_title[lang] or marketshop_feature_box4_subtitle[lang]) %}
+<div class="container">
+  <div class="custom-feature-box row">
+    {% if marketshop_feature_box1_status == 1 %}
+    {% if marketshop_feature_box1_title[lang] or marketshop_feature_box1_subtitle[lang] %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_1">
+        <div class="title">{{ marketshop_feature_box1_title[lang] }}</div>
+        <p>{{ marketshop_feature_box1_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% if marketshop_feature_box2_status == 1 %}
+    {% if marketshop_feature_box2_title[lang] or marketshop_feature_box2_subtitle[lang] %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_2">
+        <div class="title">{{ marketshop_feature_box2_title[lang] }}</div>
+        <p>{{ marketshop_feature_box2_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% if marketshop_feature_box3_status == 1 %}
+    {% if marketshop_feature_box3_title[lang] or marketshop_feature_box3_subtitle[lang] %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_3">
+        <div class="title">{{ marketshop_feature_box3_title[lang] }}</div>
+        <p>{{ marketshop_feature_box3_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    {% if marketshop_feature_box4_status == 1 %}
+    {% if marketshop_feature_box4_title[lang] or marketshop_feature_box4_subtitle[lang] %}
+    <div class="{{ class_fbox }}">
+      <div class="feature-box fbox_4">
+        <div class="title">{{ marketshop_feature_box4_title[lang] }}</div>
+        <p>{{ marketshop_feature_box4_subtitle[lang] }}</p>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+<footer id="footer">
+  <div class="fpart-first">
+    <div class="container">
+      <div class="row">
+      {% if marketshop_about_contact_details == 1 or marketshop_address[lang] or marketshop_contact[lang] or marketshop_mobile[lang] or marketshop_email[lang] %}
+        <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          {% if marketshop_contact_status == 1 and marketshop_contact[lang] %}
+          <h5>{{ marketshop_contact[lang] }}</h5>
+          {% endif %}
+          {% if marketshop_address_status == 1 or marketshop_mobile_status == 1 or marketshop_email_status == 1 %}
+          <ul>
+            {% if marketshop_address_status == 1 and marketshop_address[lang] %}
+            <li class="address"><i class="fa fa-map-marker"></i>{{ marketshop_address[lang] }}</li>
+            {% endif %}
+            {% if marketshop_mobile_status == 1 and marketshop_mobile[lang] %}
+            <li class="mobile"><i class="fa fa-phone"></i>{{ marketshop_mobile[lang] }}</li>
+            {% endif %}
+            {% if marketshop_email_status == 1 and marketshop_email[lang] %}
+            <li class="email"><i class="fa fa-envelope"></i>{{ marketshop_email[lang] }} <a href="{{ contact }}">{{ text_contact }}</a></li>
+            {% endif %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% if marketshop_about_contact_details == 0 and marketshop_contact[lang] and marketshop_about_details %}
+        <div class="about_details col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          {% if marketshop_contact_status == 1 and marketshop_contact[lang] %}
+          <h5>{{ marketshop_contact[lang] }}</h5>
+          {% endif %}
+            {{ marketshop_about_details }}
+        </div>
+        {% endif %}        
+        {% if informations %}
+        <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+          <h5>{{ text_information }}</h5>
+          <ul>
+            {% for information in informations %}
+            <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+          <h5>{{ text_service }}</h5>
+          <ul>
+          <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+          <li><a href="{{ return }}">{{ text_return }}</a></li>
+          <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+        </ul>
+        </div>
+        <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+        <h5>{{ text_extra }}</h5>
+          <ul class="list-unstyled">
+          <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
+          <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
+          {% if marketshop_affiliate_status == 1 %}
+          <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
+          {% endif %}
+          <li><a href="{{ special }}">{{ text_special }}</a></li>
+        </ul>
+        </div>
+        <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
+        <h5>{{ text_account }}</h5>
+          <ul>
+          <li><a href="{{ account }}">{{ text_account }}</a></li>
+          <li><a href="{{ order }}">{{ text_order }}</a></li>
+          <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+          <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fpart-second">
+    <div class="container">
+      <div id="powered" class="clearfix">
+        <div class="powered_text pull-left flip">
+        {% if marketshop_powered %}
+           {{ marketshop_powered }}
+          {% endif %}
+        </div>
+        
+        {% if marketshop_facebook_id or marketshop_twitter_username or marketshop_gplus_id or marketshop_pint_id or marketshop_rss or marketshop_blogger or marketshop_myspace or marketshop_linkedin or marketshop_evernote or marketshop_dopplr or marketshop_ember or marketshop_flickr or marketshop_picasa_web or marketshop_youtube or marketshop_technorati or marketshop_grooveshark or marketshop_vimeo or marketshop_sharethis or marketshop_yahoobuzz or marketshop_viddler or marketshop_skype or marketshop_google_googletalk or marketshop_digg or marketshop_reddit or marketshop_delicious or marketshop_stumbleupon or marketshop_friendfeed or marketshop_tumblr or marketshop_yelp or marketshop_posterous or marketshop_bebo or marketshop_virb or marketshop_last_fm or marketshop_pandora or marketshop_mixx or marketshop_newsvine or marketshop_openid or marketshop_readernaut or marketshop_xing_me or marketshop_instagram or marketshop_spotify or marketshop_forrst or marketshop_viadeo or marketshop_vk_com %}
+            <div class="social pull-right flip">
+              {% if marketshop_facebook_id %}
+              <a href="{{ marketshop_facebook_id }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/facebook.png" alt="Facebook" title="Facebook"></a>
+              {% endif %}
+              {% if marketshop_twitter_username %}
+              <a href="{{ marketshop_twitter_username }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/twitter.png" alt="Twitter" title="Twitter"> </a>
+              {% endif %}
+              {% if marketshop_gplus_id %}
+              <a href="{{ marketshop_gplus_id }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/google_plus.png" alt="Google+" title="Google+"> </a>
+              {% endif %}
+              {% if marketshop_pint_id %}
+              <a href="{{ marketshop_pint_id }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/pinterest.png" alt="Pinterest" title="Pinterest"> </a>
+              {% endif %}
+              {% if marketshop_rss %}
+              <a href="{{ marketshop_rss }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/rss.png" alt="RSS" title="RSS"> </a>
+              {% endif %}
+              {% if marketshop_blogger %}
+              <a href="{{ marketshop_blogger }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/blogger.png" alt="Blogger" title="Blogger"> </a>
+              {% endif %}
+              {% if marketshop_myspace %}
+              <a href="{{ marketshop_myspace }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/myspace.png" alt="myspace" title="MySpace"> </a>
+              {% endif %}
+              {% if marketshop_linkedin %}
+              <a href="{{ marketshop_linkedin }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/linkedin.png" alt="linkedin" title="LinkedIn"> </a>
+              {% endif %}
+              {% if marketshop_evernote %}
+              <a href="{{ marketshop_evernote }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/evernote.png" alt="evernote" title="evernote"> </a>
+              {% endif %}
+              {% if marketshop_dopplr %}
+              <a href="{{ marketshop_dopplr }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/dopplr.png" alt="dopplr" title="dopplr"> </a>
+              {% endif %}
+              {% if marketshop_ember %}
+              <a href="{{ marketshop_ember }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/ember.png" alt="ember" title="ember"> </a>
+              {% endif %}
+              {% if marketshop_flickr %}
+              <a href="{{ marketshop_flickr }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/flickr.png" alt="flickr" title="Flickr"> </a>
+              {% endif %}
+              {% if marketshop_picasa_web %}
+              <a href="{{ marketshop_picasa_web }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/picasa.png" alt="picasa" title="Picasa"> </a>
+              {% endif %}
+              {% if marketshop_youtube %}
+              <a href="{{ marketshop_youtube }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/youtube.png" alt="YouTube" title="YouTube"> </a>
+              {% endif %}
+              {% if marketshop_technorati %}
+              <a href="{{ marketshop_technorati }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/technorati.png" alt="technorati" title="technorati"> </a>
+              {% endif %}
+              {% if marketshop_grooveshark %}
+              <a href="{{ marketshop_grooveshark }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/grooveshark.png" alt="grooveshark" title="grooveshark"> </a>
+              {% endif %}
+              {% if marketshop_vimeo %}
+              <a href="{{ marketshop_vimeo }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/vimeo.png" alt="Vimeo" title="Vimeo"> </a>
+              {% endif %}
+              {% if marketshop_sharethis %}
+              <a href="{{ marketshop_sharethis }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/sharethis.png" alt="sharethis" title="ShareThis"> </a>
+              {% endif %}
+              {% if marketshop_yahoobuzz %}
+              <a href="{{ marketshop_yahoobuzz }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/yahoobuzz.png" alt="yahoobuzz" title="yahoobuzz"> </a>
+              {% endif %}
+              {% if marketshop_viddler %}
+              <a href="{{ marketshop_viddler }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/viddler.png" alt="viddler" title="viddler"> </a>
+              {% endif %}
+              {% if marketshop_skype %}
+              <a href="{{ marketshop_skype }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/skype.png" alt="skype" title="Skype"> </a>
+              {% endif %}
+              {% if marketshop_google_googletalk %}
+              <a href="{{ marketshop_google_googletalk }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/googletalk.png" alt="googletalk" title="Google googletalk"> </a>
+              {% endif %}
+              {% if marketshop_digg %}
+              <a href="{{ marketshop_digg }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/digg.png" alt="digg" title="Digg"> </a>
+              {% endif %}
+              {% if marketshop_reddit %}
+              <a href="{{ marketshop_reddit }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/reddit.png" alt="reddit" title="Reddit"> </a>
+              {% endif %}
+              {% if marketshop_delicious %}
+              <a href="{{ marketshop_delicious }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/delicious.png" alt="delicious" title="Delicious"> </a>
+              {% endif %}
+              {% if marketshop_stumbleupon %}
+              <a href="{{ marketshop_stumbleupon }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/stumbleupon.png" alt="stumbleupon" title="StumbleUpon"> </a>
+              {% endif %}
+              {% if marketshop_friendfeed %}
+              <a href="{{ marketshop_friendfeed }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/friendfeed.png" alt="friendfeed" title="FriendFeed"> </a>
+              {% endif %}
+              {% if marketshop_tumblr %}
+              <a href="{{ marketshop_tumblr }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/tumblr.png" alt="tumblr" title="Tumblr"> </a>
+              {% endif %}
+              {% if marketshop_yelp %}
+              <a href="{{ marketshop_yelp }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/yelp.png" alt="yelp" title="Yelp"> </a>
+              {% endif %}
+              {% if marketshop_posterous %}
+              <a href="{{ marketshop_posterous }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/posterous.png" alt="posterous" title="posterous"> </a>
+              {% endif %}
+              {% if marketshop_bebo %}
+              <a href="{{ marketshop_bebo }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/bebo.png" alt="bebo" title="Bebo"> </a>
+              {% endif %}
+              {% if marketshop_virb %}
+              <a href="{{ marketshop_virb }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/virb.png" alt="virb" title="virb"> </a>
+              {% endif %}
+              {% if marketshop_last_fm %}
+              <a href="{{ marketshop_last_fm }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/lastfm.png" alt="lastfm" title="Last.fm"> </a>
+              {% endif %}
+              {% if marketshop_pandora %}
+              <a href="{{ marketshop_pandora }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/pandora.png" alt="pandora" title="pandora"> </a>
+              {% endif %}
+              {% if marketshop_mixx %}
+              <a href="{{ marketshop_mixx }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/mixx.png" alt="mixx" title="mixx"> </a>
+              {% endif %}
+              {% if marketshop_newsvine %}
+              <a href="{{ marketshop_newsvine }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/newsvine.png" alt="newsvine" title="Newsvine"> </a>
+              {% endif %}
+              {% if marketshop_openid %}
+              <a href="{{ marketshop_openid }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/openid.png" alt="openid" title="openid"> </a>
+              {% endif %}
+              {% if marketshop_readernaut %}
+              <a href="{{ marketshop_readernaut }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/readernaut.png" alt="readernaut" title="readernaut"> </a>
+              {% endif %}
+              {% if marketshop_xing_me %}
+              <a href="{{ marketshop_xing_me }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/xing.png" alt="xing" title="xing.me"> </a>
+              {% endif %}
+              {% if marketshop_instagram %}
+              <a href="{{ marketshop_instagram }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/instagram.png" alt="instagram" title="Instagram"> </a>
+              {% endif %}
+              {% if marketshop_spotify %}
+              <a href="{{ marketshop_spotify }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/spotify.png" alt="spotify" title="Spotify"> </a>
+              {% endif %}
+              {% if marketshop_forrst %}
+              <a href="{{ marketshop_forrst }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/forrst.png" alt="forrst" title="Forrst"> </a>
+              {% endif %}
+              {% if marketshop_viadeo %}
+              <a href="{{ marketshop_viadeo }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/viadeo.png" alt="viadeo" title="Viadeo"> </a>
+              {% endif %}
+              {% if marketshop_vk_com %}
+              <a href="{{ marketshop_vk_com }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/socialicons/vk.png" alt="vk" title="VK.com"> </a>
+              {% endif %}
+            </div>
+            {% endif %}
+      </div>
+      <div class="bottom-row">
+      {% if marketshop_custom_column_footer_status == 1 and marketshop_custom_column_footer %}
+      <div class="custom-text text-center">
+      {{ marketshop_custom_column_footer }}
+      </div>
+      {% endif %}
+        
+        {% if marketshop_custom_payment_image_status or marketshop_paypal or marketshop_american or marketshop_2checkout or marketshop_discover or marketshop_maestro or marketshop_mastercard or marketshop_sagepay or marketshop_visa or marketshop_moneybookers or marketshop_cirrus or marketshop_delta or marketshop_direct or marketshop_google or marketshop_western_union or marketshop_ebay or marketshop_solo or marketshop_switch %}
+            <div class="payments_types">
+            {% if _SERVER['HTTPS'] and _SERVER['HTTPS'] != 'off' %}
+             {% set path_image = config_ssl ~ 'image/' %}
+            {% else %}
+             {% set path_image = config_url ~ 'image/' %}
+            {% endif %}
+              {% if marketshop_custom_payment_image_status and marketshop_custom_payment_image %}
+              {% if marketshop_custom_payment_image_url %}
+              <a href="{{ marketshop_custom_payment_image_url }}" target="_blank"> <img src="{{ path_image ~ marketshop_custom_payment_image }}" alt="Payment" title="Payment"></a>
+              {% else %}
+              <img src="{{ path_image ~ marketshop_custom_payment_image }}" alt="Payment" title="Payment">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_paypal %}
+              {% if marketshop_paypal_url %}
+              <a href="{{ marketshop_paypal_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_paypal.png" alt="paypal" title="PayPal"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_paypal.png" alt="paypal" title="PayPal">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_american %}
+              {% if marketshop_american_url %}
+              <a href="{{ marketshop_american_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_american.png" alt="american-express" title="American Express"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_american.png" alt="american-express" title="American Express">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_2checkout %}
+              {% if marketshop_2checkout_url %}
+              <a href="{{ marketshop_2checkout_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_2checkout.png" alt="2checkout" title="2checkout"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_2checkout.png" alt="2checkout" title="2checkout">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_maestro %}
+              {% if marketshop_maestro_url %}
+              <a href="{{ marketshop_maestro_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_maestro.png" alt="maestro" title="Maestro"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_maestro.png" alt="maestro" title="Maestro">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_discover %}
+              {% if marketshop_discover_url %}
+              <a href="{{ marketshop_discover_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_discover.png" alt="discover" title="Discover"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_discover.png" alt="discover" title="Discover">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_mastercard %}
+              {% if marketshop_mastercard_url %}
+              <a href="{{ marketshop_mastercard_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_mastercard.png" alt="mastercard" title="MasterCard"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_mastercard.png" alt="mastercard" title="MasterCard">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_visa %}
+              {% if marketshop_visa_url %}
+              <a href="{{ marketshop_visa_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_visa.png" alt="visa" title="Visa"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_visa.png" alt="visa" title="Visa">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_sagepay %}
+              {% if marketshop_sagepay_url %}
+              <a href="{{ marketshop_sagepay_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_sagepay.png" alt="sagepay" title="sagepay"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_sagepay.png" alt="sagepay" title="sagepay">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_moneybookers %}
+              {% if marketshop_moneybookers_url %}
+              <a href="{{ marketshop_moneybookers_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_moneybookers.png" alt="moneybookers" title="Moneybookers"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_moneybookers.png" alt="moneybookers" title="Moneybookers">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_cirrus %}
+              {% if marketshop_cirrus_url %}
+              <a href="{{ marketshop_cirrus_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_cirrus.png" alt="cirrus" title="Cirrus"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_cirrus.png" alt="cirrus" title="Cirrus">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_delta %}
+              {% if marketshop_delta_url %}
+              <a href="{{ marketshop_delta_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_delta.png" alt="delta" title="Delta"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_delta.png" alt="delta" title="Delta">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_direct %}
+              {% if marketshop_direct_url %}
+              <a href="{{ marketshop_direct_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_direct.png" alt="direct" title="direct"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_direct.png" alt="direct" title="direct">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_google %}
+              {% if marketshop_google_url %}
+              <a href="{{ marketshop_google_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_google.png" alt="google" title="google"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_google.png" alt="google" title="google">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_solo %}
+              {% if marketshop_solo_url %}
+              <a href="{{ marketshop_solo_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_solo.png" alt="solo" title="solo"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_solo.png" alt="solo" title="solo">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_switch %}
+              {% if marketshop_switch_url %}
+              <a href="{{ marketshop_switch_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_switch.png" alt="switch" title="switch"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_switch.png" alt="switch" title="switch">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_western_union %}
+              {% if marketshop_western_union_url %}
+              <a href="{{ marketshop_western_union_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_western_union.png" alt="western_union" title="western union"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_western_union.png" alt="western_union" title="western union">
+              {% endif %}
+              {% endif %}
+              {% if marketshop_ebay %}
+              {% if marketshop_ebay_url %}
+              <a href="{{ marketshop_ebay_url }}" target="_blank"> <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_ebay.png" alt="ebay" title="ebay"></a>
+              {% else %}
+              <img data-toggle="tooltip" src="catalog/view/theme/marketshop/image/payment_ebay.png" alt="ebay" title="ebay">
+              {% endif %}
+              {% endif %}
+            </div>
+            {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if marketshop_back_to_top == 1 %}
+  <div id="back-top"><a data-toggle="tooltip" title="Back to Top" href="javascript:void(0)" class="backtotop"><i class="fa fa-chevron-up"></i></a></div>
+  {% endif %}
+</footer>
+
+{% if marketshop_facebook_block_status == 1 %}
+<div id="facebook" class="{% if marketshop_facebook_box_align == 1 %}fb-left{% else %}fb-right{% endif %}" style="{% if marketshop_facebook_block_sort_order == 1 %}top:210px; z-index:10000;{% elseif marketshop_facebook_block_sort_order == 2 %}top:270px; z-index:9999;{% elseif marketshop_facebook_block_sort_order == 3 %}top:330px; z-index:9998;{% elseif marketshop_facebook_block_sort_order == 4 %}top:390px; z-index:9997;{% endif %}">
+  <div id="facebook_icon"><i class="fa fa-facebook"></i></div>
+  <script src="//connect.facebook.net/en_US/all.js#xfbml=1"></script>
+  <fb:fan profile_id="{{ marketshop_facebook_id_box }}" stream="0" connections="20" logobar="0" width="235" height="284" ></fb:fan>
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  {% if marketshop_facebook_box_align == 1 %}
+  <script>
+$(function(){        
+        $("#facebook.fb-left").hover(function(){            
+        $("#facebook.fb-left").stop(true, false).animate({left: "0" }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $("#facebook.fb-left").stop(true, false).animate({left: "-241px" }, 800, 'easeInQuint' );        
+        },1000);    
+  });
+	  </script>
+  {% else %}
+  <script>
+	  $(function(){        
+        $("#facebook.fb-right").hover(function(){            
+        $("#facebook.fb-right").stop(true, false).animate({right: "0" }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $("#facebook.fb-right").stop(true, false).animate({right: "-241px" }, 800, 'easeInQuint' );        
+        },1000);    
+  });
+  </script>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if marketshop_twitter_block_status == 1 %}
+<div id="twitter_footer" class="{% if marketshop_twitter_box_align == 1 %}twit-left{% else %}twit-right{% endif %}" style="{% if marketshop_twitter_block_sort_order == 1 %}top:210px; z-index:10000;{% elseif marketshop_twitter_block_sort_order == 2 %}top:270px; z-index:9999;{% elseif marketshop_twitter_block_sort_order == 3 %}top:330px; z-index:9998;{% elseif marketshop_twitter_block_sort_order == 4 %}top:390px; z-index:9997;{% endif %}">
+  <div class="twitter_icon"><i class="fa fa-twitter"></i></div>
+  <a class="twitter-timeline" href="https://twitter.com/{{ marketshop_twitter_username_block }}" data-chrome="nofooter noscrollbar transparent" data-theme="light" data-tweet-limit="2" data-related="twitterapi,twitter" data-aria-polite="assertive" data-widget-id="{{ marketshop_widget_id }}">Tweets by @{{ marketshop_twitter_username_block }}</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+{% if marketshop_twitter_box_align == 1 %}
+<script>
+$(function(){        
+        $("#twitter_footer.twit-left").hover(function(){            
+        $("#twitter_footer.twit-left").stop(true, false).animate({left: "0" }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $("#twitter_footer.twit-left").stop(true, false).animate({left: "-215px" }, 800, 'easeInQuint' );        
+        },1000);    
+  });  
+	  </script>
+{% else %}
+<script>
+	  $(function(){        
+        $("#twitter_footer.twit-right").hover(function(){            
+        $("#twitter_footer.twit-right").stop(true, false).animate({right: "0" }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $("#twitter_footer.twit-right").stop(true, false).animate({right: "-215px" }, 800, 'easeInQuint' );        
+        },1000);    
+  });
+  </script>
+{% endif %}
+{% endif %}
+
+{% if marketshop_video_box_status == 1 %}
+<div id="video_box" class="{% if marketshop_video_box_align == 1 %}vb-left{% else %}vb-right{% endif %}" style="{% if marketshop_video_box_sort_order == 1 %}top:210px; z-index:10000;{% elseif marketshop_video_box_sort_order == 2 %}top:270px; z-index:9999;{% elseif marketshop_video_box_sort_order == 3 %}top:330px; z-index:9998;{% elseif marketshop_video_box_sort_order == 4 %}top:390px; z-index:9997;{% endif %}">
+  <div id="video_box_icon"><i class="fa fa-play"></i></div>
+  {% if marketshop_video_box_content %}
+   {{ marketshop_video_box_content }}
+  {% endif %}
+</div>
+{% if marketshop_video_box_align== 1 %}
+<script>
+  $(function(){        
+        $("#video_box.vb-left").hover(function(){            
+        $("#video_box.vb-left").stop(true, false).animate({left: "0" }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $("#video_box.vb-left").stop(true, false).animate({left: "-566px" }, 800, 'easeInQuint' );        
+        },1000);    
+  });
+	  </script>
+{% else %}
+<script>
+	  $(function(){        
+        $("#video_box.vb-right").hover(function(){            
+        $("#video_box.vb-right").stop(true, false).animate({right: "0" }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $("#video_box.vb-right").stop(true, false).animate({right: "-566px" }, 800, 'easeInQuint' );        
+        },1000);    
+  });
+	  </script>
+{% endif %}
+{% endif %}
+
+{% if marketshop_custom_column_status == 1 and marketshop_custom_column %}
+<div id="custom_side_block" class="{% if marketshop_custom_side_block_align == 1 %}custom_side_block_left{% else %}custom_side_block_right{% endif %}" style="{% if marketshop_custom_side_block_sort_order == 1 %}top:210px; z-index:10000;{% elseif marketshop_custom_side_block_sort_order == 2 %}top:270px; z-index:9999;{% elseif marketshop_custom_side_block_sort_order == 3 %}top:330px; z-index:9998;{% elseif marketshop_custom_side_block_sort_order == 4 %}top:390px; z-index:9997;{% endif %}">
+  <div class="custom_side_block_icon">
+    {% if marketshop_custom_side_block_align == 1 %}
+    <i class="fa fa-chevron-right"></i>
+    {% else %}
+    <i class="fa fa-chevron-left"></i>
+    {% endif %}
+  </div>
+{{ marketshop_custom_column }}
+</div>
+{% if marketshop_custom_side_block_align == 1 %}
+<script>
+$(function(){        
+        $('#custom_side_block.custom_side_block_left').hover(function(){            
+        $('#custom_side_block.custom_side_block_left').stop(true, false).animate({left: '0' }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $('#custom_side_block.custom_side_block_left').stop(true, false).animate({left: '-215px' }, 800, 'easeInQuint' );        
+        },1000);    
+  });  
+	  </script>
+{% else %}
+<script>
+$(function(){        
+        $("#custom_side_block.custom_side_block_right").hover(function(){            
+        $("#custom_side_block.custom_side_block_right").stop(true, false).animate({right: "0" }, 800, 'easeOutQuint' );        
+        },
+  function(){            
+        $("#custom_side_block.custom_side_block_right").stop(true, false).animate({right: "-215px" }, 800, 'easeInQuint' );        
+        },1000);    
+  });
+  </script>
+{% endif %}
+{% endif %}
+</section>
+</body></html>
