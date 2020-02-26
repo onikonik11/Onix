@@ -1,0 +1,7 @@
+git clone (link)
+git add -- all
+git commit -m "(вставка коментов)"
+git push origin master
+
+git pull origin master
+
